@@ -2,11 +2,14 @@ package com.domain.web;
 
 import com.util.PartialList;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * @author justburrow
  * @since 2017. 4. 1.
  */
-public interface Site {
+public interface Site extends WebObject {
   int PAGE_SIZE = 20;
 
   /**
@@ -22,7 +25,13 @@ public interface Site {
   /**
    * @return
    */
-  int getPort();
+  default URL getUrl() {
+    try {
+      return new URL(getProtocol().name(), getHost(), "");
+    } catch (MalformedURLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   /**
    * @param page
