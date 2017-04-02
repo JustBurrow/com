@@ -1,4 +1,4 @@
-package com.util;
+package com.util.time;
 
 import java.time.Instant;
 

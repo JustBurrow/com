@@ -7,8 +7,8 @@ import java.net.URL;
  * @since 2017. 4. 1.
  */
 public enum Protocol {
-  HTTP(80),
-  HTTPS(443);
+  HTTP,
+  HTTPS;
 
   /**
    * @param url
@@ -16,18 +16,5 @@ public enum Protocol {
    */
   public static Protocol valueOf(URL url) {
     return valueOf(url.getProtocol().toUpperCase());
-  }
-
-  private final int defaultPort;
-
-  Protocol(int defaultPort) {
-    this.defaultPort = defaultPort;
-  }
-
-  /**
-   * @return
-   */
-  public int defaultPort() {
-    return this.defaultPort;
   }
 }

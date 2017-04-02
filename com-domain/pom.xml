@@ -11,6 +11,11 @@
   <artifactId>com-domain</artifactId>
   <dependencies>
     <dependency>
+      <groupId>com</groupId>
+      <artifactId>com-util</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>

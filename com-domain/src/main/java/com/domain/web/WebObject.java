@@ -1,6 +1,6 @@
 package com.domain.web;
 
-import com.util.Updatable;
+import com.util.time.Updatable;
 
 /**
  * @author justburrow

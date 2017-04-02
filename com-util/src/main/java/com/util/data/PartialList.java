@@ -1,4 +1,4 @@
-package com.util;
+package com.util.data;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,15 +14,15 @@ public interface PartialList<I> {
   /**
    * @return 전체 페이지 수.
    */
-  int getTotalPage();
+  int getTotalPages();
 
   /**
    * @return 전체 아이템 수.
    */
-  long getTotalElement();
+  long getTotalElements();
 
   /**
-   * @return 현재 페이지.
+   * @return 현재 페이지. 0-base.
    */
   int getPage();
 

@@ -5,7 +5,7 @@ import com.domain.web.Protocol;
 import com.domain.web.Site;
 import com.domain.web.WebObjectType;
 import com.jpa.listener.TimestampEntityListener;
-import com.util.PartialList;
+import com.util.data.PartialList;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -19,6 +19,10 @@ import java.net.URL;
 @Table(name = "master_site",
     uniqueConstraints = {@UniqueConstraint(name = "UQ_SITE", columnNames = {"protocol", "host"})})
 public class SiteEntity extends AbstractWebObject implements Site {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false, insertable = false, updatable = false)
+  private int      id;
   @Column(name = "protocol", nullable = false, updatable = false)
   @Enumerated
   private Protocol protocol;
@@ -36,6 +40,11 @@ public class SiteEntity extends AbstractWebObject implements Site {
   public SiteEntity(URL url, String description) {
     this(url);
     setDescription(description);
+  }
+
+  @Override
+  public int getId() {
+    return this.id;
   }
 
   @Override

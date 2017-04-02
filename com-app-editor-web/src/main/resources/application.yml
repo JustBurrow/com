@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/com
+    username: root
+    password:
+    max-active: 1
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+  thymeleaf:
+    cache: false
+    prefix: file:./templates/
+  messages:
+    cache-seconds: -1
+    encoding: UTF-8
+    basename: message/messages
+server:
+  port: 8081
+logging:
+  level:
+    root: warn
+    com: debug

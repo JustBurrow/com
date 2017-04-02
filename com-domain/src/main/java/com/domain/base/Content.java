@@ -1,6 +1,7 @@
 package com.domain.base;
 
-import com.util.Updatable;
+
+import com.util.time.Updatable;
 
 /**
  * 기본 자룡형.

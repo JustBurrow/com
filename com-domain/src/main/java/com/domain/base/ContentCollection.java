@@ -1,6 +1,7 @@
 package com.domain.base;
 
-import com.util.PartialList;
+
+import com.util.data.PartialList;
 
 /**
  * @author justburrow

@@ -1,6 +1,6 @@
 package com.domain.web;
 
-import com.util.PartialList;
+import com.util.data.PartialList;
 
 import java.net.MalformedURLException;
 import java.net.URL;

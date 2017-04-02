@@ -2,7 +2,8 @@ package com.jpa.entity.web;
 
 import com.domain.web.WebObject;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.time.Instant;
 
 /**
@@ -11,10 +12,6 @@ import java.time.Instant;
  */
 @MappedSuperclass
 public abstract class AbstractWebObject implements WebObject {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  private int     id;
   @Column(name = "description")
   private String  description;
   @Column(name = "create_utc", nullable = false, updatable = false)
@@ -29,20 +26,23 @@ public abstract class AbstractWebObject implements WebObject {
     setDescription(description);
   }
 
-
+  /**
+   * 구현 클래스에만 있는 멤버를 인자로 받아 출력용 문자열을 만든다.
+   * <p>
+   * <p><b>하위 클래스 정보에서 ID는 제외할 것.</b><br/><b>DO NOT INCLUDE ID.</b></p>
+   *
+   * @param clz 구현 클래스.
+   * @param str 구현 클래스의 인스턴스 정보. ID를 포함하지 말 것.
+   * @return 전체 인스턴스 정보.
+   */
   protected String toString(Class<? extends WebObject> clz, CharSequence str) {
     return new StringBuilder(clz.getSimpleName())
-        .append("{id=").append(this.id)
+        .append("{id=").append(this.getId())
         .append(", description=").append(this.description)
         .append(", ").append(str)
         .append(", create=").append(this.create)
         .append(", update=").append(this.update)
         .append('}').toString();
-  }
-
-  @Override
-  public int getId() {
-    return this.id;
   }
 
   @Override
@@ -67,6 +67,6 @@ public abstract class AbstractWebObject implements WebObject {
 
   @Override
   public int hashCode() {
-    return this.id;
+    return this.getId();
   }
 }

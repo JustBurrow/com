@@ -3,6 +3,8 @@
 
 ## File-based project format:
 *.iws
+*.bak
+*.swp
 
 ## Plugin-specific files:
 
