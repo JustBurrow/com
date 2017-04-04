@@ -17,4 +17,18 @@ public enum Protocol {
   public static Protocol valueOf(URL url) {
     return valueOf(url.getProtocol().toUpperCase());
   }
+
+  /**
+   * @return
+   */
+  public int getId() {
+    return ordinal();
+  }
+
+  /**
+   * @return
+   */
+  public String getName() {
+    return name();
+  }
 }

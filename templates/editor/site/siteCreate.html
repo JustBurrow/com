@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 3." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <title th:text="#{site.create.title}">site create</title>
+</head>
+<body>
+<div class="row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul>
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <h1 th:text="#{site.create.h1}">Create site</h1>
+    <form action="siteIndex.html" method="post"
+          th:action="@{/sites}" th:object="${createReq}">
+      <div class="control-group">
+        <label for="protocol">PROTOCOL</label>
+        <select id="protocol" class="form-control" required="required" th:value="*{protocol}">
+          <option disabled="disabled" selected="selected">---</option>
+          <option th:each="p : ${protocolValues}" th:value="${p.id}" th:text="${p.name}">protocol</option>
+          <option th:remove="all">http</option>
+          <option th:remove="all">https</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="host">DOMAIN</label>
+        <input id="host" name="host" class="form-control"
+               required="required" pattern="([a-zA-Z\d-]+\.)+[a-zA-Z]{2,}" placeholder="input domain."
+               th:value="*{host}" th:placeholder="#{site.create.form.host.placeholder}"/>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <button class="form-control btn btn-primary" th:text="#{site.create.form.submit}">submit</button>
+        </div>
+        <div class="col-md-4">
+          <button class="form-control btn btn-warning" type="reset" th:text="#{site.create.form.reset}">reset</button>
+        </div>
+        <div class="col-md-4">
+          <a class="form-control btn btn-link" href="siteIndex.html"
+             th:href="@{/sites}" th:text="#{site.create.form.backward}">back</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
