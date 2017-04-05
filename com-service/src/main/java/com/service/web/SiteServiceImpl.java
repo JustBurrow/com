@@ -1,7 +1,9 @@
 package com.service.web;
 
 import com.domain.web.Site;
+import com.jpa.entity.web.SiteEntity;
 import com.service.web.dao.SiteDao;
+import com.service.web.params.CreateSiteParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,22 @@ import static java.lang.String.format;
 
   @Autowired
   private SiteDao siteDao;
+
+  @Override
+  public Site create(CreateSiteParams params) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("params=%s", params));
+    }
+
+    Site site = new SiteEntity(params.getUrl());
+    site.setDescription(params.getDescription());
+    site = this.siteDao.create(site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site created : %s", site));
+    }
+    return site;
+  }
 
   @Override
   public List<Site> list() {

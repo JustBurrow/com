@@ -1,6 +1,7 @@
 package com.service.web.dao;
 
 import com.domain.web.Site;
+import com.jpa.entity.web.SiteEntity;
 import com.jpa.repository.SiteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,20 @@ import static java.lang.String.format;
 
   @Autowired
   private SiteRepository siteRepository;
+
+  @Override
+  public Site create(Site site) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("site before : %s", site));
+    }
+
+    site = this.siteRepository.save((SiteEntity) site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site after : %s", site));
+    }
+    return site;
+  }
 
   @Override
   public List<Site> listAll() {

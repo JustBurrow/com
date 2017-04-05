@@ -12,5 +12,14 @@ import java.util.List;
  */
 @Transactional(propagation = Propagation.MANDATORY)
 public interface SiteDao {
+  /**
+   * @param site
+   * @return
+   */
+  Site create(Site site);
+
+  /**
+   * @return
+   */
   List<Site> listAll();
 }

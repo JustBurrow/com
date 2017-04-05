@@ -18,6 +18,10 @@ public enum Protocol {
     return valueOf(url.getProtocol().toUpperCase());
   }
 
+  public static Protocol valueOf(int ordinal) {
+    return Protocol.values()[ordinal];
+  }
+
   /**
    * @return
    */

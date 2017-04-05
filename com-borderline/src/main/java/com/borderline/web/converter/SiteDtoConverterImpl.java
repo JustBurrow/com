@@ -28,7 +28,7 @@ import static java.lang.String.format;
     dto.setUrl(site.getUrl());
 
     if (log.isDebugEnabled()) {
-      log.debug(format("dto=%", dto));
+      log.debug(format("dto=%s", dto));
     }
     return dto;
   }

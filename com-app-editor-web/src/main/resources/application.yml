@@ -5,6 +5,8 @@ spring:
     username: root
     password:
     max-active: 1
+    min-idle: 1
+    max-idle: 1
   jpa:
     show-sql: true
     generate-ddl: true
@@ -12,10 +14,10 @@ spring:
   thymeleaf:
     cache: false
     prefix: file:./templates/
-  messages!:
+  messages:
     cache-seconds: -1
     encoding: UTF-8
-    basename: message/messages
+    basename: i18n/messages
 server:
   port: 8081
 logging:
