@@ -35,4 +35,12 @@ public interface SiteController {
   @PostMapping
   String create(@ModelAttribute @Valid final CreateSiteReq req, final BindingResult result, final Model model)
       throws HttpException;
+
+  /**
+   * @param model
+   * @return
+   * @throws HttpException
+   */
+  @GetMapping
+  String index(Model model) throws HttpException;
 }

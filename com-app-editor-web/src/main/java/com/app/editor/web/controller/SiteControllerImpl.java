@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.validation.Valid;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -63,7 +64,7 @@ import static java.lang.String.format;
 
     CreateSiteCmd cmd = null;
     try {
-      cmd = new CreateSiteCmd(protocol, req.getHost(), req.getHost());
+      cmd = new CreateSiteCmd(protocol, req.getHost(), req.getDescription());
     } catch (MalformedURLException e) {
       model.addAttribute("createReq", req);
       model.addAttribute("protocolValues", Protocol.values());
@@ -72,5 +73,21 @@ import static java.lang.String.format;
     SiteDto site = this.siteBorderline.create(cmd);
 
     return "redirect:/sites";
+  }
+
+  @Override
+  public String index(final Model model)
+      throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("before model : %s", model));
+    }
+
+    List<SiteDto> list = this.siteBorderline.list();
+    model.addAttribute("siteList", list);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("after model : %s", model));
+    }
+    return "editor/site/siteIndex";
   }
 }

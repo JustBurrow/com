@@ -16,10 +16,10 @@
   <title th:text="#{site.create.title}">site create</title>
 </head>
 <body>
-<div class="row">
+<div class="container row">
   <div class="col-md-2">
     <nav th:replace="editor/component/navigation/main :: sidebar">
-      <ul>
+      <ul th:remove="all">
         <li><a href="#">side navigation</a></li>
       </ul>
     </nav>

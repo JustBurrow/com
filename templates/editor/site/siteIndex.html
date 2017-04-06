@@ -16,6 +16,42 @@
   <title th:text="#{site.index.title}">sites</title>
 </head>
 <body>
-
+<div class="container row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul th:remove="all">
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <h1 th:text="#{site.index.h1}">site list</h1>
+    <table id="site-list" class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>URL</th>
+        <th th:text="#{site.index.sitelist.create}">create</th>
+        <th th:text="#{site.index.sitelist.update}">update</th>
+        <th>Opt.</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="site : ${siteList}">
+        <td th:text="${site.id}">id</td>
+        <td th:text="${site.url}">url</td>
+        <td th:text="${site.create}">create</td>
+        <td th:text="${site.update}">update</td>
+        <td><a href="site.html" class="btn btn-link"
+               th:href="@{/sites/__${site.id}__}" th:text="#{site.index.sitelist.link.edit}">edit</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <a href="siteCreate.html" class="btn btn-default"
+         th:href="@{/sites/create}" th:text="#{site.index.link.create}">create</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>

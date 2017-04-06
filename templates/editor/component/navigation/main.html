@@ -18,9 +18,10 @@
 <body>
 <h1>메인 네비게이션</h1>
 <div th:fragment="sidebar">
-  <nav>
-    <ul>
-      <li><a href="#" th:href="@{/sites}" th:text="#{component.navigation.main.sidebar.site}">site</a></li>
+  <nav class="sidebar-module">
+    <ul class="list-unstyled">
+      <li><a href="../../site/siteIndex.html" class="btn btn-link"
+             th:href="@{/sites}" th:text="#{component.navigation.main.sidebar.site}">site</a></li>
     </ul>
   </nav>
 </div>
