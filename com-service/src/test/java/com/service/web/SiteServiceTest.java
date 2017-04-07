@@ -13,10 +13,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
 import java.util.List;
 
+import static com.service.ServiceModuleTestConfiguration.RANDOM;
+import static java.lang.String.format;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -30,8 +34,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SiteServiceTest {
   @Autowired
   private SiteService siteService;
+  private Instant     before;
 
-  private Instant before;
+  public static CreateSiteParams randomCreateSiteParams() throws MalformedURLException {
+    URL url = new URL(
+        (RANDOM.nextBoolean() ? "http" : "https"),
+        format("%s.%s", randomAlphabetic(2, 10), randomAlphabetic(2, 4)).toLowerCase(), "");
+    String description = format("service test : random site #%d", RANDOM.nextInt(Integer.MAX_VALUE));
+
+    return new CreateSiteParams(url, description);
+  }
 
   @Before
   public void setUp() throws Exception {
@@ -43,15 +55,15 @@ public class SiteServiceTest {
   @Test
   public void testCreate() throws Exception {
     // Given
-    CreateSiteParams params = new CreateSiteParams(new URL("http://example.com"));
+    CreateSiteParams params = randomCreateSiteParams();
 
     // When
     Site site = this.siteService.create(params);
 
     // Then
     assertThat(site)
-        .extracting(Site::getDescription, Site::getProtocol, Site::getHost)
-        .containsExactly(null, Protocol.HTTP, "example.com");
+        .extracting(Site::getProtocol, Site::getHost, Site::getDescription)
+        .containsExactly(Protocol.valueOf(params.getUrl()), params.getHost(), params.getDescription());
     assertThat(site.getCreate())
         .isGreaterThanOrEqualTo(this.before)
         .isEqualTo(site.getUpdate());
@@ -63,7 +75,6 @@ public class SiteServiceTest {
     List<Site> list = this.siteService.list();
 
     // Then
-    assertThat(list).isNotNull()
-                    .isEmpty();
+    assertThat(list).isNotNull();
   }
 }

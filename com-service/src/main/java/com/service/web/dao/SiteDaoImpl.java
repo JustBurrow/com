@@ -46,4 +46,18 @@ import static java.lang.String.format;
     }
     return list;
   }
+
+  @Override
+  public Site read(int id) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d", id));
+    }
+
+    Site site = this.siteRepository.findOne(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", site));
+    }
+    return site;
+  }
 }

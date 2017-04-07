@@ -1,11 +1,13 @@
 package com.borderline.web;
 
 import com.borderline.web.cmd.CreateSiteCmd;
+import com.borderline.web.cmd.UpdateSiteCmd;
 import com.borderline.web.converter.SiteDtoConverter;
 import com.borderline.web.dto.SiteDto;
 import com.domain.web.Site;
 import com.service.web.SiteService;
 import com.service.web.params.CreateSiteParams;
+import com.service.web.params.UpdateSiteParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,36 @@ import static java.lang.String.format;
       log.debug(format("list=%s", list));
     }
     return list;
+  }
+
+  @Override
+  public SiteDto read(int id) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d", id));
+    }
+
+    Site    site = this.siteService.read(id);
+    SiteDto dto  = this.siteDtoConverter.convert(site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", dto));
+    }
+    return dto;
+  }
+
+  @Override
+  public SiteDto update(UpdateSiteCmd cmd) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("cmd=%s", cmd));
+    }
+
+    UpdateSiteParams params = new UpdateSiteParams(cmd.getId(), cmd.getDescription());
+    Site             site   = this.siteService.update(params);
+    SiteDto          dto    = this.siteDtoConverter.convert(site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("dto=%s", dto));
+    }
+    return dto;
   }
 }

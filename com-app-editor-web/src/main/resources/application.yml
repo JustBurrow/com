@@ -11,6 +11,12 @@ spring:
     show-sql: true
     generate-ddl: true
     database: mysql
+  mvc:
+    formcontent:
+      putfilter:
+        enabled: true
+#    dispatch-options-request: true
+#    dispatch-trace-request: true
   thymeleaf:
     cache: false
     prefix: file:./templates/
@@ -21,6 +27,8 @@ spring:
 server:
   port: 8081
 logging:
+  pattern:
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(-%5p) %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger{39}#%M [L.%L]){cyan} %clr(:){faint} %m%n%wEx'
   level:
-    root: warn
+#    root: warn
     com: debug

@@ -1,6 +1,7 @@
 package com.borderline.web;
 
 import com.borderline.web.cmd.CreateSiteCmd;
+import com.borderline.web.cmd.UpdateSiteCmd;
 import com.borderline.web.dto.SiteDto;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,4 +28,16 @@ public interface SiteBorderline {
    * @return
    */
   List<SiteDto> list();
+
+  /**
+   * @param id
+   * @return
+   */
+  SiteDto read(int id);
+
+  /**
+   * @param cmd
+   * @return
+   */
+  SiteDto update(UpdateSiteCmd cmd);
 }

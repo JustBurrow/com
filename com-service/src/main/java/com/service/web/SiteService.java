@@ -2,6 +2,7 @@ package com.service.web;
 
 import com.domain.web.Site;
 import com.service.web.params.CreateSiteParams;
+import com.service.web.params.UpdateSiteParams;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,4 +27,16 @@ public interface SiteService {
    * @return 전체 목록.
    */
   List<Site> list();
+
+  /**
+   * @param id
+   * @return
+   */
+  Site read(int id);
+
+  /**
+   * @param params
+   * @return
+   */
+  Site update(UpdateSiteParams params);
 }

@@ -7,6 +7,8 @@ import com.util.provider.TimeProvider;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Random;
+
 /**
  * @author justburrow
  * @since 2017. 4. 2.
@@ -17,6 +19,8 @@ import org.springframework.context.annotation.Bean;
     JpaModuleAnchor.class
 })
 public class BorderlineModuleTestConfiguration {
+  public static final Random RANDOM = new Random(new Random().nextLong());
+
   @Bean
   public TimeProvider timeProvider() {
     return SystemTimeProvider.createInstance();

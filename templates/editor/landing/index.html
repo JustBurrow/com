@@ -16,18 +16,16 @@
   <title th:text="#{landing.index.title}">landing page</title>
 </head>
 <body>
-<div class="container-fluid">
-  <h1 th:text="#{landing.index.h1}">landing heading #1</h1>
-  <div class="row">
-    <div class="col-md-2">
-      <nav th:replace="editor/component/navigation/main :: sidebar">
-        <ul>
-          <li><a href="#">side navigation</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="col-md-10">
-    </div>
+<div class="container row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul th:remove="all">
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <h1 th:text="#{landing.index.h1}">landing heading #1</h1>
   </div>
 </div>
 </body>

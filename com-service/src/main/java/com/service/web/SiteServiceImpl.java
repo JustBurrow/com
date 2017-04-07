@@ -4,6 +4,7 @@ import com.domain.web.Site;
 import com.jpa.entity.web.SiteEntity;
 import com.service.web.dao.SiteDao;
 import com.service.web.params.CreateSiteParams;
+import com.service.web.params.UpdateSiteParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,34 @@ import static java.lang.String.format;
       log.debug(format("list=%s", list));
     }
     return list;
+  }
+
+  @Override
+  public Site read(int id) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d", id));
+    }
+
+    Site site = this.siteDao.read(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", site));
+    }
+    return site;
+  }
+
+  @Override
+  public Site update(UpdateSiteParams params) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("params=%s", params));
+    }
+
+    Site site = this.siteDao.read(params.getId());
+    site.setDescription(params.getDescription());
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", site));
+    }
+    return site;
   }
 }

@@ -20,6 +20,8 @@
 <div th:fragment="sidebar">
   <nav class="sidebar-module">
     <ul class="list-unstyled">
+      <li><a href="../../landing/index.html" class="btn btn-link"
+             th:href="@{/}" th:text="#{component.navigation.main.sidebar.landing}">index</a></li>
       <li><a href="../../site/siteIndex.html" class="btn btn-link"
              th:href="@{/sites}" th:text="#{component.navigation.main.sidebar.site}">site</a></li>
     </ul>

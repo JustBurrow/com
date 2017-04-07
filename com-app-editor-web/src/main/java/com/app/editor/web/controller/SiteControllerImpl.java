@@ -1,9 +1,11 @@
 package com.app.editor.web.controller;
 
 import com.app.editor.web.controller.req.CreateSiteReq;
+import com.app.editor.web.controller.req.UpdateSiteReq;
 import com.app.editor.web.exception.HttpException;
 import com.borderline.web.SiteBorderline;
 import com.borderline.web.cmd.CreateSiteCmd;
+import com.borderline.web.cmd.UpdateSiteCmd;
 import com.borderline.web.dto.SiteDto;
 import com.domain.web.Protocol;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 import java.net.MalformedURLException;
@@ -89,5 +92,58 @@ import static java.lang.String.format;
       log.debug(format("after model : %s", model));
     }
     return "editor/site/siteIndex";
+  }
+
+  @Override
+  public String detail(@PathVariable("id") final int id, final Model model) throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d, model=%s", id, model));
+    }
+
+    SiteDto site = this.siteBorderline.read(id);
+    model.addAttribute("site", site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("after model : %s", model));
+    }
+    return "editor/site/siteDetail";
+  }
+
+  @Override
+  public String updateForm(@PathVariable("id") final int id, final Model model) throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d, model=%s", id, model));
+    }
+
+    SiteDto site = this.siteBorderline.read(id);
+    model.addAttribute("site", site);
+
+    UpdateSiteReq req = new UpdateSiteReq(site.getDescription());
+    model.addAttribute("updateReq", req);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("after model : %s", model));
+    }
+    return "editor/site/siteEdit";
+  }
+
+  @Override
+  public String update(@PathVariable("id") final int id, @ModelAttribute final UpdateSiteReq req,
+                       final BindingResult result, final Model model) throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("req=%s, result=%s, model=%s", req, result, model));
+    }
+    if (result.hasErrors()) {
+      return "editor/site/siteEdit";
+    }
+
+    UpdateSiteCmd cmd      = new UpdateSiteCmd(id, req.getDescription());
+    SiteDto       site     = this.siteBorderline.update(cmd);
+    String        redirect = format("redirect:/sites/%d", site.getId());
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("after redirect=%s, model=%s", redirect, model));
+    }
+    return redirect;
   }
 }

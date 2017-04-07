@@ -22,4 +22,11 @@ public interface SiteDao {
    * @return
    */
   List<Site> listAll();
+
+  /**
+   *
+   * @param id
+   * @return
+   */
+  Site read(int id);
 }
