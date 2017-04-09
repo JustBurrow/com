@@ -27,7 +27,7 @@
   <div class="col-md-10">
     <h1 th:text="#{site.edit.h1}">site edit</h1>
     <form action="siteDetail.html" method="post"
-          th:action="@{/sites/__${site.id}__}" th:method="PUT"
+          th:action="@{/sites/__${site.id}__}" th:method="patch"
           th:object="${updateReq}">
       <div class="form-group">
         <label for="id">ID</label>

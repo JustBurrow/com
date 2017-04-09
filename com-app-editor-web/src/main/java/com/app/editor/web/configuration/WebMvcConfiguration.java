@@ -1,6 +1,8 @@
 package com.app.editor.web.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -11,4 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+  @Bean
+  public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+    return new HiddenHttpMethodFilter();
+  }
 }

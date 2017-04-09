@@ -5,9 +5,7 @@ import com.app.editor.web.controller.req.UpdateSiteReq;
 import com.app.editor.web.exception.HttpException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,7 +20,7 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping("/create")
+  @GetMapping("/create")
   String createForm(final Model model) throws HttpException;
 
   /**
@@ -32,7 +30,7 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping(method = RequestMethod.POST)
+  @PostMapping
   String create(@ModelAttribute @Valid final CreateSiteReq req, final BindingResult result, final Model model)
       throws HttpException;
 
@@ -41,7 +39,7 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping
+  @GetMapping
   String index(Model model) throws HttpException;
 
   /**
@@ -50,7 +48,7 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping(value = "/{id:[1-9]\\d*}", method = RequestMethod.GET)
+  @GetMapping("/{id:[1-9]\\d*}")
   String detail(int id, Model model) throws HttpException;
 
   /**
@@ -59,7 +57,7 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping("/{id:[1-9]\\d*}/edit")
+  @GetMapping("/{id:[1-9]\\d*}/edit")
   String updateForm(int id, Model model) throws HttpException;
 
   /**
@@ -69,6 +67,6 @@ public interface SiteController {
    * @return
    * @throws HttpException
    */
-  @RequestMapping(value = "/{id:[1-9]\\d*}", method = RequestMethod.PUT)
+  @PatchMapping("/{id:[1-9]\\d*}")
   String update(int id, UpdateSiteReq req, BindingResult result, Model model) throws HttpException;
 }
