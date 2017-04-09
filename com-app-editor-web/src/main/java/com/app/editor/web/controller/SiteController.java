@@ -44,12 +44,13 @@ public interface SiteController {
 
   /**
    * @param id
+   * @param page
    * @param model
    * @return
    * @throws HttpException
    */
   @GetMapping("/{id:[1-9]\\d*}")
-  String detail(int id, Model model) throws HttpException;
+  String detail(int id, int page, Model model) throws HttpException;
 
   /**
    * @param id

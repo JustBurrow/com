@@ -2,6 +2,7 @@ package com.borderline.web;
 
 import com.borderline.web.cmd.CreateSiteCmd;
 import com.borderline.web.cmd.UpdateSiteCmd;
+import com.borderline.web.converter.PagingDtoConvertContext;
 import com.borderline.web.converter.SiteDtoConverter;
 import com.borderline.web.dto.SiteDto;
 import com.domain.web.Site;
@@ -61,9 +62,18 @@ import static java.lang.String.format;
     if (log.isDebugEnabled()) {
       log.debug(format("id=%d", id));
     }
+    return read(id, 0);
+  }
 
-    Site    site = this.siteService.read(id);
-    SiteDto dto  = this.siteDtoConverter.convert(site);
+  @Override
+  public SiteDto read(int id, int page) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d, page=%d", id, page));
+    }
+
+    Site                    site    = this.siteService.read(id);
+    PagingDtoConvertContext context = new PagingDtoConvertContext(page, Site.DEFAULT_PAGE_SIZE);
+    SiteDto                 dto     = this.siteDtoConverter.convert(site, context);
 
     if (log.isDebugEnabled()) {
       log.debug(format("site=%s", dto));

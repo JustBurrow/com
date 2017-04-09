@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.net.MalformedURLException;
@@ -95,12 +96,15 @@ import static java.lang.String.format;
   }
 
   @Override
-  public String detail(@PathVariable("id") final int id, final Model model) throws HttpException {
+  public String detail(
+      @PathVariable("id") final int id,
+      @RequestParam(name = "page", defaultValue = "1") int page, final Model model)
+      throws HttpException {
     if (log.isDebugEnabled()) {
       log.debug(format("id=%d, model=%s", id, model));
     }
 
-    SiteDto site = this.siteBorderline.read(id);
+    SiteDto site = this.siteBorderline.read(id, --page);
     model.addAttribute("site", site);
 
     if (log.isDebugEnabled()) {

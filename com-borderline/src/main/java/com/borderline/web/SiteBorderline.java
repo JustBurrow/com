@@ -36,6 +36,13 @@ public interface SiteBorderline {
   SiteDto read(int id);
 
   /**
+   * @param id
+   * @param page
+   * @return
+   */
+  SiteDto read(int id, int page);
+
+  /**
    * @param cmd
    * @return
    */
