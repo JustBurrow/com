@@ -36,4 +36,18 @@ import static java.lang.String.format;
     }
     return page;
   }
+
+  @Override
+  public Page read(int id) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("id=%d", id));
+    }
+
+    Page page = this.pageDao.read(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("page=%s", page));
+    }
+    return page;
+  }
 }

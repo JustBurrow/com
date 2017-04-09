@@ -32,9 +32,10 @@
       <div class="form-group">
         <label for="path" th:text="#{page.create.form.path.label}">path</label>
         <span class="form-control">
-          <label for="path" th:text="${site.url}">site url</label>/
-          <input id="path" class="" pattern="\w+(/\w+)*/?" placeholder="ex) pages/create/123" style="border: none;"
-                 th:field="*{path}" th:placeholder="#{page.create.form.path.placeholder}"/>
+          <label for="path"
+                 th:text="${site.url}">site url</label>/<input
+            id="path" class="" pattern="\w+(/\w+)*/?" placeholder="ex) pages/create/123" style="border: none;"
+            th:field="*{path}" th:placeholder="#{page.create.form.path.placeholder}"/>
         </span>
       </div>
       <div class="form-group">

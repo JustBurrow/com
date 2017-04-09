@@ -15,4 +15,10 @@ public interface PageService {
    * @return
    */
   Page create(CreatePageParams params);
+
+  /**
+   * @param id
+   * @return
+   */
+  Page read(int id);
 }

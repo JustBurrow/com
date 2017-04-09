@@ -32,4 +32,14 @@ public interface PageController {
    */
   @PostMapping("/{siteId:[1-9]\\d*}")
   String create(int siteId, CreatePageReq req, BindingResult binding, Model model) throws HttpException;
+
+  /**
+   * @param siteId
+   * @param pageId
+   * @param model
+   * @return
+   * @throws HttpException
+   */
+  @GetMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}")
+  String read(int siteId, int pageId, Model model) throws HttpException;
 }

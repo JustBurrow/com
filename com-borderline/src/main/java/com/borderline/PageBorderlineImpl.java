@@ -1,6 +1,7 @@
 package com.borderline;
 
 import com.borderline.web.cmd.CreatePageCmd;
+import com.borderline.web.cmd.ReadPageCmd;
 import com.borderline.web.converter.PageDtoConverter;
 import com.borderline.web.dto.PageDto;
 import com.domain.web.Layout;
@@ -45,6 +46,25 @@ import static java.lang.String.format;
     Page             page   = this.pageService.create(params);
     PageDto          dto    = this.pageDtoConverter.convert(page);
 
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("dto=%s", dto));
+    }
+    return dto;
+  }
+
+  @Override
+  public PageDto read(ReadPageCmd cmd) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("cmd=%s", cmd));
+    }
+
+    Page    page = this.pageService.read(cmd.getPage());
+    if (cmd.getSite() != page.getSite().getId()){
+      return null;
+    }
+
+    PageDto dto  = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));

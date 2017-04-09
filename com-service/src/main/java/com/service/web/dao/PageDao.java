@@ -15,4 +15,11 @@ public interface PageDao {
    * @return
    */
   Page create(Page page);
+
+  /**
+   *
+   * @param id
+   * @return
+   */
+  Page read(int id);
 }

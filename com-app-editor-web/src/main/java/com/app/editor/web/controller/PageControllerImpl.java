@@ -1,11 +1,13 @@
 package com.app.editor.web.controller;
 
 import com.app.editor.web.controller.req.CreatePageReq;
+import com.app.editor.web.controller.req.UpdatePageReq;
 import com.app.editor.web.exception.HttpException;
 import com.borderline.PageBorderline;
 import com.borderline.web.LayoutBorderline;
 import com.borderline.web.SiteBorderline;
 import com.borderline.web.cmd.CreatePageCmd;
+import com.borderline.web.cmd.ReadPageCmd;
 import com.borderline.web.dto.PageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,5 +61,31 @@ import static java.lang.String.format;
     PageDto page = this.pageBorderline.create(cmd);
 
     return format("redirect:/pages/%d/%d", siteId, page.getId());
+  }
+
+  @Override
+  public String read(
+      @PathVariable("siteId") final int siteId,
+      @PathVariable("pageId") final int pageId, final Model model)
+      throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("siteId=%d, pageId=%d, model=%s", siteId, pageId, model));
+    }
+
+    ReadPageCmd cmd  = new ReadPageCmd(siteId, pageId);
+    PageDto     page = this.pageBorderline.read(cmd);
+
+    model.addAttribute("site", this.siteBorderline.read(siteId));
+    model.addAttribute("page", page);
+
+    UpdatePageReq req = new UpdatePageReq(
+        page.getPath(), page.getTitle(), page.getLayout().getId(), page.getDescription());
+    model.addAttribute("layouts", this.layoutBorderline.list(siteId));
+    model.addAttribute("updateReq", req);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("after model : %s", model));
+    }
+    return "editor/page/pageDetail";
   }
 }
