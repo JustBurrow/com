@@ -24,14 +24,25 @@ public interface Page extends WebObject {
    */
   void setPath(String path);
 
+  /**
+   * @return
+   */
   String getTitle();
 
+  /**
+   * @param title
+   */
   void setTitle(String title);
 
   /**
    * @return
    */
   Layout getLayout();
+
+  /**
+   * @param layout
+   */
+  void setLayout(Layout layout);
 
   /**
    * @return

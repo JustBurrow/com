@@ -6,15 +6,32 @@ import java.util.Map;
  * @author justburrow
  * @since 2017. 4. 1.
  */
-public interface Layout {
+public interface Layout extends WebObject {
+  /**
+   * @return
+   */
+  Site getSite();
+
   /**
    * @return
    */
   String getName();
 
-  Map<String, View> getViews();
+  /**
+   * @return
+   */
+  Map<String, Fraction> getFractions();
 
-  View getView(String name);
+  /**
+   * @param name
+   * @return
+   */
+  Fraction getFraction(String name);
 
-  View setView(String name, View view);
+  /**
+   * @param name
+   * @param view
+   * @return
+   */
+  Fraction setFraction(String name, Fraction view);
 }

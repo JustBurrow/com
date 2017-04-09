@@ -27,7 +27,7 @@ import static java.lang.String.format;
     }
 
     PageDto dto = initialize(page, new PageDto());
-
+    dto.setSite(page.getSite().getUrl());
     dto.setPath(page.getPath());
     dto.setTitle(page.getTitle());
 

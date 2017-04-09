@@ -1,0 +1,36 @@
+package com.service.web.dao;
+
+import com.domain.web.Page;
+import com.jpa.entity.web.PageEntity;
+import com.jpa.repository.PageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import static java.lang.String.format;
+
+/**
+ * @author justburrow
+ * @since 2017. 4. 10.
+ */
+@Service class PageDaoImpl implements PageDao {
+  private static final Logger log = LoggerFactory.getLogger(PageDao.class);
+
+  @Autowired
+  private PageRepository pageRepository;
+
+  @Override
+  public Page create(Page page) {
+    if(log.isDebugEnabled()){
+      log.debug(format("before page : %s", page));
+    }
+
+    page = pageRepository.save((PageEntity) page);
+
+    if(log.isDebugEnabled()){
+      log.debug(format("after page : %s", page));
+    }
+    return page;
+  }
+}

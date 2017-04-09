@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 9." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <title th:text="#{page.create.title}">create page</title>
+</head>
+<body>
+<div class="container row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul th:remove="all">
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <h1 th:text="#{page.create.h1}">Create site</h1>
+    <!--/*@thymesVar id="createReq" type="com.app.editor.web.controller.req.CreatePageReq"*/-->
+    <form action="pageDetail.html" method="post"
+          th:action="@{/pages/__${site.id}__}" th:object="${createReq}">
+      <div class="form-group">
+        <label for="path" th:text="#{page.create.form.path.label}">path</label>
+        <span class="form-control">
+          <label for="path" th:text="${site.url}">site url</label>/
+          <input id="path" class="" pattern="\w+(/\w+)*/?" placeholder="ex) pages/create/123" style="border: none;"
+                 th:field="*{path}" th:placeholder="#{page.create.form.path.placeholder}"/>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="title" th:text="#{page.create.form.title.label}">title</label>
+        <input id="title" class="form-control" placeholder="Page title in browser tab."
+               th:field="*{title}" th:placeholder="#{page.create.form.title.placeholder}"/>
+      </div>
+      <div class="form-group">
+        <label for="layout" th:text="#{page.create.form.layout.label}">layout</label>
+        <select id="layout" class="form-control" required="required" th:field="*{layout}">
+          <option th:each="layout : ${layouts}" th:value="${layout.id}" th:text="${layout.name}">layout name</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description" th:text="#{page.create.form.description.label}">description</label>
+        <textarea id="description" class="form-control" placeholder="Input page description."
+                  th:field="*{description}" th:placeholder="#{page.create.form.description.placeholer}"></textarea>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <button class="btn btn-primary form-control" th:text="#{page.create.form.submit.label}">submit</button>
+        </div>
+        <div class="col-md-4">
+          <button type="reset" class="btn btn-warning form-control"
+                  th:text="#{page.create.form.reset.label}">reset
+          </button>
+        </div>
+        <div class="col-md-4">
+          <a href="../site/siteDetail.html" class="btn btn-link form-control"
+             th:href="@{/sites/__${site.id}__}" th:text="#{page.create.form.cancel.label}">cancel(site)</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

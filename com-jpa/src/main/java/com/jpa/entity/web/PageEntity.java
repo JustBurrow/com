@@ -35,6 +35,12 @@ public class PageEntity extends AbstractWebObject implements Page {
   private String path;
   @Column(name = "title", nullable = false)
   private String title;
+  @ManyToOne(targetEntity = LayoutEntity.class)
+  @JoinColumn(name = "layout",
+      foreignKey = @ForeignKey(name = "FK_PAGE_PK_LAYOUT"),
+      referencedColumnName = "id",
+      nullable = false)
+  private Layout layout;
 
   private PageEntity() {
   }
@@ -45,16 +51,17 @@ public class PageEntity extends AbstractWebObject implements Page {
 
   public PageEntity(Site site, String path) {
     this(site);
-    this.path = path;
+    setPath(path);
   }
 
-  public PageEntity(Site site, String path, String title) {
+  public PageEntity(Site site, String path, String title, Layout layout) {
     this(site, path);
-    this.title = title;
+    setTitle(title);
+    setLayout(layout);
   }
 
-  public PageEntity(Site site, String path, String title, String description) {
-    this(site, path, title);
+  public PageEntity(Site site, String path, String title, Layout layout, String description) {
+    this(site, path, title, layout);
     setDescription(description);
   }
 
@@ -95,7 +102,12 @@ public class PageEntity extends AbstractWebObject implements Page {
 
   @Override
   public Layout getLayout() {
-    return null;
+    return this.layout;
+  }
+
+  @Override
+  public void setLayout(Layout layout) {
+    this.layout = layout;
   }
 
   @Override
