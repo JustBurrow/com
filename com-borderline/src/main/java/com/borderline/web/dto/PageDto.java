@@ -1,20 +1,17 @@
 package com.borderline.web.dto;
 
-import com.util.data.PartialList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.net.URL;
-
 /**
  * @author justburrow
- * @since 2017. 4. 2.
+ * @since 2017. 4. 9.
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class SiteDto extends WebObjectDto {
-  private URL                  url;
-  private PartialList<PageDto> pages;
+public class PageDto extends WebObjectDto {
+  private String path;
+  private String title;
 }

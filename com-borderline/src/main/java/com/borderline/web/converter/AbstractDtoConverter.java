@@ -2,6 +2,8 @@ package com.borderline.web.converter;
 
 import com.borderline.web.dto.WebObjectDto;
 import com.domain.web.WebObject;
+import com.util.data.PartialList;
+import com.util.data.SimplePartialList;
 import com.util.provider.TimeProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,5 +41,31 @@ class AbstractDtoConverter {
       log.debug(format("dto=%s", dto));
     }
     return dto;
+  }
+
+  /**
+   * @param source
+   * @param converter
+   * @param <S>
+   * @param <D>
+   * @return
+   */
+  protected <S, D> PartialList<D> convertPartialList(PartialList<S> source, DtoConverter<S, D, ?> converter) {
+    if(log.isDebugEnabled()){
+      log.debug(format("source=%s, converter=%s", source, converter));
+    }
+
+    PartialList<D> list = new SimplePartialList<>(
+        source.getTotalPages(),
+        source.getTotalElements(),
+        source.getPage(),
+        source.getCapacity(),
+        converter.convert(source.getContent())
+    );
+
+    if(log.isDebugEnabled()){
+      log.debug(format("dto list : %s", list));
+    }
+    return list;
   }
 }

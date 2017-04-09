@@ -10,7 +10,7 @@ import java.net.URL;
  * @since 2017. 4. 1.
  */
 public interface Site extends WebObject {
-  int PAGE_SIZE = 20;
+  int DEFAULT_PAGE_SIZE = 3;
 
   /**
    * @return
@@ -45,6 +45,6 @@ public interface Site extends WebObject {
    * @return
    */
   default PartialList<Page> getPages(int page) {
-    return getPages(page, PAGE_SIZE);
+    return getPages(page, DEFAULT_PAGE_SIZE);
   }
 }

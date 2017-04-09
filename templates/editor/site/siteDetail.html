@@ -44,6 +44,45 @@
       <a href="siteIndex.html" class="btn btn-default"
          th:href="@{/sites}" th:text="#{site.detail.list}">list</a>
     </div>
+    <section id="pages">
+      <h2 th:text="#{site.detail.pages.h2}">page list</h2>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>PATH</th>
+          <th th:text="#{site.detail.pages.description}">description</th>
+          <th th:text="#{site.detail.pages.create}">created at</th>
+          <th th:text="#{site.detail.pages.update}">updated at</th>
+          <th>Opt.</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="page : ${site.pages.content}">
+          <td>
+            <a class="btn btn-link" href="../page/pageDetail.html" th:href="@{/pages/__${page.id}__}"
+               th:text="${page.id}">id</a>
+          </td>
+          <td>
+            <a href="../page/pageDetail.html" th:href="@{/pages/__${page.id}__}" th:text="${page.path}">path</a>
+          </td>
+          <td th:text="${site.description}">description</td>
+          <td th:text="${site.create}">create</td>
+          <td th:text="${site.update}">update</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+      <div th:unless="0 == ${site.pages.totalPages}">
+        <ol th:start="${1 +site.pages.page}">
+          <li th:each="p : ${#numbers.sequence(__${1 +site.pages.page}__, __${site.pages.totalPages}__)}">
+            <span th:if="p == ${1 +site.pages.page}">current page</span>
+            <a href="siteDetail.html" th:unless="p == ${1 +site.pages.page}"
+               th:href="@{/sites/__${site.id}__(page=__${p}__)}" th:text="${p}">#1</a>
+          </li>
+        </ol>
+      </div>
+    </section>
   </div>
 </div>
 </body>

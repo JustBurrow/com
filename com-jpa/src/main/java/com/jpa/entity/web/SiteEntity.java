@@ -6,9 +6,12 @@ import com.domain.web.Site;
 import com.domain.web.WebObjectType;
 import com.jpa.listener.TimestampEntityListener;
 import com.util.data.PartialList;
+import com.util.data.SimplePartialList;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author justburrow
@@ -22,17 +25,22 @@ public class SiteEntity extends AbstractWebObject implements Site {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  private int      id;
+  private int        id;
   @Column(name = "protocol", nullable = false, updatable = false)
   @Enumerated
-  private Protocol protocol;
+  private Protocol   protocol;
   @Column(name = "host", nullable = false, updatable = false)
-  private String   host;
+  private String     host;
+  @OneToMany(targetEntity = PageEntity.class, mappedBy = "site")
+  @OrderBy("path")
+  private List<Page> pages;
 
   private SiteEntity() {
+    this.pages = new ArrayList<>();
   }
 
   public SiteEntity(URL url) {
+    this();
     this.protocol = Protocol.valueOf(url);
     this.host = url.getHost();
   }
@@ -64,7 +72,12 @@ public class SiteEntity extends AbstractWebObject implements Site {
 
   @Override
   public PartialList<Page> getPages(int page, int size) {
-    return null;
+    return SimplePartialList.asPartialList(pages, page, size);
+  }
+
+  @Override
+  public int hashCode() {
+    return this.id;
   }
 
   @Override

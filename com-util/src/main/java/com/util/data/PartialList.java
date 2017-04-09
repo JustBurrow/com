@@ -27,6 +27,11 @@ public interface PartialList<I> {
   int getPage();
 
   /**
+   * @return 페이지의 최대 아이템 수.
+   */
+  int getCapacity();
+
+  /**
    * @return 현재 페이지의 아이템 수.
    */
   int getSize();

@@ -36,8 +36,13 @@ public class PagePartialList<T> implements PartialList<T> {
   }
 
   @Override
-  public int getSize() {
+  public int getCapacity() {
     return this.page.getSize();
+  }
+
+  @Override
+  public int getSize() {
+    return this.page.getNumberOfElements();
   }
 
   @Override
