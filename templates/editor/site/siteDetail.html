@@ -61,11 +61,11 @@
         <tr th:each="page : ${site.pages.content}">
           <td>
             <a class="btn btn-link" href="../page/pageEdit.html"
-               th:href="@{/pages/__${site.id}__/__${page.id}__}/edit" th:text="${page.id}">id</a>
+               th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="${page.id}">id</a>
           </td>
           <td>
             <a href="../page/pageEdit.html"
-               th:href="@{/pages/__${site.id}__/__${page.id}__}/edit" th:text="${page.path}">path</a>
+               th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="${page.path}">path</a>
           </td>
           <td th:text="${site.description}">description</td>
           <td th:text="${site.create}">create</td>

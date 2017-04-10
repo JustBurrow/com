@@ -79,6 +79,8 @@
     </section>
     <section id="content">
       <h2 th:text="#{page.detail.content.h2}">page content</h2>
+      <div th:replace="layout/__${site.id}__/__${page.layout.name}__ :: display(${page})">
+      </div>
     </section>
   </div>
 </div>
