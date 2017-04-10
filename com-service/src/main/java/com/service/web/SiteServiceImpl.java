@@ -1,5 +1,6 @@
 package com.service.web;
 
+import com.domain.web.Protocol;
 import com.domain.web.Site;
 import com.jpa.entity.web.SiteEntity;
 import com.service.web.dao.SiteDao;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -18,7 +20,7 @@ import static java.lang.String.format;
  * @author justburrow
  * @since 2017. 4. 2.
  */
-@Service class SiteServiceImpl implements SiteService {
+@Service class øSiteServiceImpl implements SiteService {
   private static final Logger log = LoggerFactory.getLogger(SiteService.class);
 
   @Autowired
@@ -57,6 +59,23 @@ import static java.lang.String.format;
     }
 
     Site site = this.siteDao.read(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", site));
+    }
+    return site;
+  }
+
+  @Override
+  public Site read(URL url) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("url=%s", url));
+    }
+
+    Protocol protocol = Protocol.valueOf(url);
+    String   host     = url.getHost();
+
+    Site site = this.siteDao.read(protocol, host);
 
     if (log.isDebugEnabled()) {
       log.debug(format("site=%s", site));

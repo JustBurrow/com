@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
+
 import static java.lang.String.format;
 
 /**
@@ -67,6 +69,25 @@ import static java.lang.String.format;
     }
 
     PageDto dto = this.pageDtoConverter.convert(page);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("dto=%s", dto));
+    }
+    return dto;
+  }
+
+  @Override
+  public PageDto read(URL url) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("url=%s", url));
+    }
+
+    Site site = this.siteService.read(url);
+
+    String path = url.getPath();
+    path = path.replaceAll("^/", "");
+    Page    page = this.pageService.read(site, path);
+    PageDto dto  = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));

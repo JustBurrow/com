@@ -1,6 +1,7 @@
 package com.service.web;
 
 import com.domain.web.Page;
+import com.domain.web.Site;
 import com.jpa.entity.web.PageEntity;
 import com.service.web.dao.PageDao;
 import com.service.web.params.CreatePageParams;
@@ -45,6 +46,20 @@ import static java.lang.String.format;
     }
 
     Page page = this.pageDao.read(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("page=%s", page));
+    }
+    return page;
+  }
+
+  @Override
+  public Page read(Site site, String path) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s, path=%s", site, path));
+    }
+
+    Page page = this.pageDao.read(site, path);
 
     if (log.isDebugEnabled()) {
       log.debug(format("page=%s", page));

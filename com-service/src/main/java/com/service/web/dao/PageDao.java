@@ -1,6 +1,7 @@
 package com.service.web.dao;
 
 import com.domain.web.Page;
+import com.domain.web.Site;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,15 @@ public interface PageDao {
   Page create(Page page);
 
   /**
-   *
    * @param id
    * @return
    */
   Page read(int id);
+
+  /**
+   * @param site
+   * @param path
+   * @return
+   */
+  Page read(Site site, String path);
 }

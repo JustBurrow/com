@@ -30,6 +30,10 @@ import static java.lang.String.format;
       log.debug(format("page=%s", page));
     }
 
+    if( null == page ){
+      return null;
+    }
+
     PageDto dto = initialize(page, new PageDto());
     dto.setSite(page.getSite().getUrl());
     dto.setPath(page.getPath());

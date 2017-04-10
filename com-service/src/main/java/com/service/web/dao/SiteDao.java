@@ -1,5 +1,6 @@
 package com.service.web.dao;
 
+import com.domain.web.Protocol;
 import com.domain.web.Site;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,15 @@ public interface SiteDao {
   List<Site> listAll();
 
   /**
-   *
    * @param id
    * @return
    */
   Site read(int id);
+
+  /**
+   * @param protocol
+   * @param host
+   * @return
+   */
+  Site read(Protocol protocol, String host);
 }

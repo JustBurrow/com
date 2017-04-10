@@ -14,12 +14,8 @@ spring:
   thymeleaf:
     cache: false
     prefix: file:./templates/
-  messages:
-    cache-seconds: -1
-    encoding: UTF-8
-    basename: i18n/messages
 server:
-  port: 8081
+  port: 8080
 logging:
   pattern:
     console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(-%5p) %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger{39}#%M [L.%L]){cyan} %clr(:){faint} %m%n%wEx'

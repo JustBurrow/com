@@ -1,5 +1,6 @@
 package com.service.web.dao;
 
+import com.domain.web.Protocol;
 import com.domain.web.Site;
 import com.jpa.entity.web.SiteEntity;
 import com.jpa.repository.SiteRepository;
@@ -54,6 +55,20 @@ import static java.lang.String.format;
     }
 
     Site site = this.siteRepository.findOne(id);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("site=%s", site));
+    }
+    return site;
+  }
+
+  @Override
+  public Site read(Protocol protocol, String host) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("protocol=%s, host=%s", protocol, host));
+    }
+
+    SiteEntity site = this.siteRepository.findOneByProtocolAndHost(protocol, host);
 
     if (log.isDebugEnabled()) {
       log.debug(format("site=%s", site));

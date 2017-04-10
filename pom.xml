@@ -14,6 +14,7 @@
     <module>com-service</module>
     <module>com-borderline</module>
     <module>com-app-editor-web</module>
+    <module>com-app-viewer-web</module>
   </modules>
   <properties>
     <java.version>1.8</java.version>

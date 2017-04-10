@@ -7,6 +7,8 @@ import com.borderline.web.dto.PageDto;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URL;
+
 /**
  * @author justburrow
  * @since 2017. 4. 9.
@@ -26,7 +28,12 @@ public interface PageBorderline {
   PageDto read(ReadPageCmd cmd);
 
   /**
-   *
+   * @param url
+   * @return
+   */
+  PageDto read(URL url);
+
+  /**
    * @param cmd
    * @return
    */

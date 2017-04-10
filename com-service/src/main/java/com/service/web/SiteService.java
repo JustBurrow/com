@@ -5,6 +5,7 @@ import com.service.web.params.CreateSiteParams;
 import com.service.web.params.UpdateSiteParams;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -33,6 +34,13 @@ public interface SiteService {
    * @return
    */
   Site read(int id);
+
+  /**
+   *
+   * @param url
+   * @return
+   */
+  Site read(URL url);
 
   /**
    * @param params

@@ -6,6 +6,7 @@ import com.borderline.web.dto.SiteDto;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -41,6 +42,13 @@ public interface SiteBorderline {
    * @return
    */
   SiteDto read(int id, int page);
+
+  /**
+   *
+   * @param url
+   * @return
+   */
+  SiteDto read(URL url);
 
   /**
    * @param cmd

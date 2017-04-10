@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -77,6 +78,21 @@ import static java.lang.String.format;
 
     if (log.isDebugEnabled()) {
       log.debug(format("site=%s", dto));
+    }
+    return dto;
+  }
+
+  @Override
+  public SiteDto read(URL url) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("url=%s", url));
+    }
+
+    Site    site = this.siteService.read(url);
+    SiteDto dto  = this.siteDtoConverter.convert(site);
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("dto=%s", dto));
     }
     return dto;
   }
