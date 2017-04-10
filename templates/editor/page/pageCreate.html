@@ -27,7 +27,9 @@
   <div class="col-md-10">
     <h1 th:text="#{page.create.h1}">Create site</h1>
     <!--/*@thymesVar id="createReq" type="com.app.editor.web.controller.req.CreatePageReq"*/-->
-    <form action="pageDetail.html" method="post"
+    <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
+    <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
+    <form action="pageEdit.html" method="post"
           th:action="@{/pages/__${site.id}__}" th:object="${createReq}">
       <div class="form-group">
         <label for="path" th:text="#{page.create.form.path.label}">path</label>
@@ -46,6 +48,8 @@
       <div class="form-group">
         <label for="layout" th:text="#{page.create.form.layout.label}">layout</label>
         <select id="layout" class="form-control" required="required" th:field="*{layout}">
+          <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
+          <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
           <option th:each="layout : ${layouts}" th:value="${layout.id}" th:text="${layout.name}">layout name</option>
         </select>
       </div>

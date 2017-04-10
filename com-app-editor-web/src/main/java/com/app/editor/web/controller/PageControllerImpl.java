@@ -8,6 +8,7 @@ import com.borderline.web.LayoutBorderline;
 import com.borderline.web.SiteBorderline;
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
+import com.borderline.web.cmd.UpdatePageCmd;
 import com.borderline.web.dto.PageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ import static java.lang.String.format;
   }
 
   @Override
-  public String read(
+  public String updateForm(
       @PathVariable("siteId") final int siteId,
       @PathVariable("pageId") final int pageId, final Model model)
       throws HttpException {
@@ -86,6 +87,25 @@ import static java.lang.String.format;
     if (log.isDebugEnabled()) {
       log.debug(format("after model : %s", model));
     }
-    return "editor/page/pageDetail";
+    return "editor/page/pageEdit";
+  }
+
+  @Override
+  public String update(
+      @PathVariable("siteId") final int siteId,
+      @PathVariable("pageId") int pageId,
+      @ModelAttribute final UpdatePageReq req, final BindingResult binding, final Model model) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("siteId=%d, pageId=%d, req=%s, binding=%s, model=%s", siteId, pageId, req, binding, model));
+    }
+
+    UpdatePageCmd cmd = new UpdatePageCmd(siteId, pageId, req.getPath(), req.getTitle(), req.getLayout(),
+                                          req.getDescription());
+    PageDto page = this.pageBorderline.update(cmd);
+    if (null == page) {
+      return "redirect:/";
+    }
+
+    return format("redirect:/pages/%d/%d/edit", siteId, pageId);
   }
 }

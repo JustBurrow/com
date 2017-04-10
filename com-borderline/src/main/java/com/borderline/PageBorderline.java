@@ -2,6 +2,7 @@ package com.borderline;
 
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
+import com.borderline.web.cmd.UpdatePageCmd;
 import com.borderline.web.dto.PageDto;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,4 +24,11 @@ public interface PageBorderline {
    * @return
    */
   PageDto read(ReadPageCmd cmd);
+
+  /**
+   *
+   * @param cmd
+   * @return
+   */
+  PageDto update(UpdatePageCmd cmd);
 }

@@ -29,7 +29,9 @@
     <section>
       <h2 th:text="#{page.detail.basic.h2}">page basic</h2>
       <!--/*@thymesVar id="updateReq" type="com.app.editor.web.controller.req.UpdatePageReq"*/-->
-      <form id="basic" action="pageDetail.html" method="post"
+      <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
+      <!--/*@thymesVar id="page" type="com.borderline.web.dto.PageDto"*/-->
+      <form id="basic" action="pageEdit.html" method="post"
             th:action="@{/pages/__${site.id}__/__${page.id}__}" th:method="patch" th:object="${updateReq}">
         <div class="form-group">
           <label for="basic-path" th:text="#{page.detail.basic.form.path.label}">path</label>
@@ -38,6 +40,11 @@
               id="basic-path" style="border: none;"
               th:field="*{path}" th:placeholder="#{page.detail.basic.form.path.placeholder}"/>
           </span>
+        </div>
+        <div class="form-group">
+          <label for="basic-title" th:text="#{page.detail.basic.form.title.label}">title</label>
+          <input id="basic-title" class="form-control" placeholder="Input page title."
+                 th:field="*{title}" th:placeholder="#{page.detail.basic.form.title.placeholder}"/>
         </div>
         <div class="form-group">
           <label for="basic-layout" th:text="#{page.detail.basic.form.layout.label }">layout</label>

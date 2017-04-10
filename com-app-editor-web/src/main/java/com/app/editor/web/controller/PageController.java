@@ -1,10 +1,12 @@
 package com.app.editor.web.controller;
 
 import com.app.editor.web.controller.req.CreatePageReq;
+import com.app.editor.web.controller.req.UpdatePageReq;
 import com.app.editor.web.exception.HttpException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,6 +42,18 @@ public interface PageController {
    * @return
    * @throws HttpException
    */
-  @GetMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}")
-  String read(int siteId, int pageId, Model model) throws HttpException;
+  @GetMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}/edit")
+  String updateForm(int siteId, int pageId, Model model) throws HttpException;
+
+  /**
+   *
+   * @param siteId
+   * @param pageId
+   * @param req
+   * @param binding
+   * @param model
+   * @return
+   */
+  @PatchMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}")
+  String update(int siteId, int pageId, UpdatePageReq req, BindingResult binding, Model model);
 }

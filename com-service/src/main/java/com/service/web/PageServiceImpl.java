@@ -4,6 +4,7 @@ import com.domain.web.Page;
 import com.jpa.entity.web.PageEntity;
 import com.service.web.dao.PageDao;
 import com.service.web.params.CreatePageParams;
+import com.service.web.params.UpdatePageParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,28 @@ import static java.lang.String.format;
     if (log.isDebugEnabled()) {
       log.debug(format("page=%s", page));
     }
+    return page;
+  }
+
+  @Override
+  public Page update(UpdatePageParams params) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("params=%s", params));
+    }
+
+    Page page = this.pageDao.read(params.getId());
+    if (null == page) {
+      return null;
+    } else if (!page.getSite().equals(params.getSite())) {
+      log.warn(format("params=%s, page=%s", params, page));
+      return null;
+    }
+
+    page.setPath(params.getPath());
+    page.setTitle(params.getTitle());
+    page.setLayout(params.getLayout());
+    page.setDescription(params.getDescription());
+
     return page;
   }
 }
