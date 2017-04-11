@@ -50,7 +50,9 @@
         <select id="layout" class="form-control" required="required" th:field="*{layout}">
           <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
           <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
-          <option th:each="layout : ${layouts}" th:value="${layout.id}" th:text="${layout.name}">layout name</option>
+          <option th:each="layout : ${layouts}" th:value="${layout.id}" th:text="${layout.layoutTemplate}">
+            layout template name
+          </option>
         </select>
       </div>
       <div class="form-group">

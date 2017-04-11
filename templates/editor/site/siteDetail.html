@@ -75,13 +75,13 @@
         </tbody>
       </table>
       <div th:unless="0 == ${site.pages.totalPages}">
-        <ol th:start="${1 +site.pages.page}">
+        <ul class="pagination" th:start="${1 +site.pages.page}">
           <li th:each="p : ${#numbers.sequence(__${1 +site.pages.page}__, __${site.pages.totalPages}__)}">
             <span th:if="p == ${1 +site.pages.page}">current page</span>
             <a href="siteDetail.html" th:unless="p == ${1 +site.pages.page}"
                th:href="@{/sites/__${site.id}__(page=__${p}__)}" th:text="${p}">#1</a>
           </li>
-        </ol>
+        </ul>
       </div>
       <div>
         <a href="../page/pageCreate.html" class="btn btn-link"

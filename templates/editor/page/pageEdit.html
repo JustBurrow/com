@@ -51,7 +51,9 @@
           <select id="basic-layout" class="form-control" required="required" th:field="*{layout}">
             <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
             <!--/*@thymesVar id="l" type="com.borderline.web.dto.LayoutDto"*/-->
-            <option th:each="l : ${layouts}" th:value="${l.id}" th:text="${l.name}">layout name</option>
+            <option th:each="l : ${layouts}" th:value="${l.id}" th:text="${l.layoutTemplate}">
+              layout template name
+            </option>
           </select>
         </div>
         <div class="form-group">
@@ -62,24 +64,25 @@
         </div>
         <div class="form-group row">
           <div class=" col-md-4">
-            <button class="form-control btn btn-primary" th:text="#{page.detail.basic.form.submit.label}">submit
+            <button class="form-control btn btn-primary"
+                    th:text="#{page.detail.basic.form.submit.label}">submit
             </button>
           </div>
           <div class="col-md-4">
-            <button type="reset" class="form-control btn btn-warning" th:text="#{page.detail.basic.form.reset.label}">
-              reset
+            <button type="reset" class="form-control btn btn-warning"
+                    th:text="#{page.detail.basic.form.reset.label}">reset
             </button>
           </div>
           <div class="col-md-4">
             <a href="../site/siteDetail.html" class="form-control btn btn-default"
-               th:text="#{page.detail.basic.form.cancel.label}">site</a>
+               th:href="@{/sites/__${site.id}__}" th:text="#{page.detail.basic.form.cancel.label}">site</a>
           </div>
         </div>
       </form>
     </section>
     <section id="content">
       <h2 th:text="#{page.detail.content.h2}">page content</h2>
-      <div th:replace="layout/__${site.id}__/__${page.layout.name}__ :: display(${page})">
+      <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'edit')">
       </div>
     </section>
   </div>

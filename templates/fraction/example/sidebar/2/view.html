@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta name="author" content="justburrow" th:remove="all"/>
-  <meta name="since" content="2017. 4. 11." th:remove="all"/>
+  <meta name="since" content="2017. 4. 12." th:remove="all"/>
   <meta name="project" content="com" th:remove="all"/>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -13,28 +13,22 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
           integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
           crossorigin="anonymous"></script>
-  <title>default layout #1</title>
+  <title>Example Sidebar Fraction - EDIT MODE</title>
 </head>
 <body>
-<div th:fragment="display(page, mode)" class="container">
-  <div class="fraction" data-fraction="header"
-       th:include="fraction/__${page.layout.fraction('header').fractionTemplate}__/__${mode}__ :: display(${header})">
-    header fraction
-  </div>
-  <div class="container row">
-    <div class="fraction col-md-10" data-fraction="content"
-         th:include="fraction/__${page.layout.fraction('content').fractionTemplate}__/__${mode}__ :: display(${content})">
-      content fraction
-    </div>
-    <div class="fraction col-md-2" data-fraction="sidebar"
-         th:include="fraction/__${page.layout.fraction('sidebar').fractionTemplate}__/__${mode}__ :: display(${sidebar})">
-      sidebar fraction
-    </div>
-  </div>
-  <div class="fraction" data-fraction="footer"
-       th:include="fraction/__${page.layout.fraction('footer').fractionTemplate}__/__${mode}__ :: display(${footer})">
-    footer fraction
-  </div>
+<div class="fraction" th:fragment="display(fraction)">
+  <section>
+    <h3>SIDEBAR</h3>
+    <ul>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+      <li><a href="#">side</a></li>
+    </ul>
+  </section>
 </div>
 </body>
 </html>

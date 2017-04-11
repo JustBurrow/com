@@ -16,7 +16,7 @@
   <title th:text="${page.title}">title</title>
 </head>
 <body>
-<div th:replace="layout/__${site.id}__/__${page.layout.name}__ :: display(${page})">
+<div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'view')">
 </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ import java.util.Map;
 @Entity(name = "Layout")
 @EntityListeners(TimestampEntityListener.class)
 @Table(name = "master_layout",
-    uniqueConstraints = @UniqueConstraint(name = "UQ_LAYOUT", columnNames = {"site", "name"}))
+    uniqueConstraints = @UniqueConstraint(name = "UQ_LAYOUT", columnNames = {"site", "template_name"}))
 public class LayoutEntity extends AbstractWebObject implements Layout {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
       nullable = false,
       updatable = false)
   private Site                  site;
-  @Column(name = "name", nullable = false)
-  private String                name;
+  @Column(name = "template_name", nullable = false)
+  private String                layoutTemplate;
   @ManyToMany(targetEntity = FractionEntity.class, cascade = CascadeType.ALL)
   @JoinTable(name = "rel_layout_fraction",
       joinColumns = @JoinColumn(name = "layout",
@@ -52,14 +52,14 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
     this.fractions = new HashMap<>();
   }
 
-  public LayoutEntity(Site site, String name) {
+  public LayoutEntity(Site site, String templateName) {
     this();
     this.site = site;
-    this.name = name;
+    this.layoutTemplate = templateName;
   }
 
-  public LayoutEntity(Site site, String name, String description) {
-    this(site, name);
+  public LayoutEntity(Site site, String templateName, String description) {
+    this(site, templateName);
     setDescription(description);
   }
 
@@ -79,8 +79,8 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
   }
 
   @Override
-  public String getName() {
-    return this.name;
+  public String getLayoutTemplate() {
+    return this.layoutTemplate;
   }
 
   @Override
@@ -116,6 +116,6 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
   public String toString() {
     return toString(LayoutEntity.class, new StringBuilder()
         .append("site=").append(null == this.site ? null : this.site.getUrl())
-        .append("name=").append(this.name));
+        .append("layoutTemplate=").append(this.layoutTemplate));
   }
 }

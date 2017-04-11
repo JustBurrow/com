@@ -22,15 +22,15 @@ public class FractionEntity extends AbstractWebObject implements Fraction {
   private int    id;
   @Column(name = "name", nullable = false)
   private String name;
-  @Column(name = "template", nullable = false)
-  private String template;
+  @Column(name = "template_name", nullable = false)
+  private String fractionTemplate;
 
   public FractionEntity() {
   }
 
-  public FractionEntity(String name, String template) {
+  public FractionEntity(String name, String templateName) {
     setName(name);
-    setTemplate(template);
+    setFractionTemplate(templateName);
   }
 
   @Override
@@ -54,13 +54,13 @@ public class FractionEntity extends AbstractWebObject implements Fraction {
   }
 
   @Override
-  public String getTemplate() {
-    return this.template;
+  public String getFractionTemplate() {
+    return this.fractionTemplate;
   }
 
   @Override
-  public void setTemplate(String template) {
-    this.template = template;
+  public void setFractionTemplate(String templateName) {
+    this.fractionTemplate = templateName;
   }
 
   @Override
@@ -86,6 +86,6 @@ public class FractionEntity extends AbstractWebObject implements Fraction {
   public String toString() {
     return toString(FractionEntity.class, new StringBuilder()
         .append("name=").append(this.name)
-        .append("template=").append(this.template));
+        .append(", fractionTemplate=").append(this.fractionTemplate));
   }
 }

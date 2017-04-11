@@ -63,8 +63,8 @@ public class LayoutRepositoryTest {
     // Then
     assertThat(actual)
         .isNotNull()
-        .extracting(Layout::getSite, Layout::getName, Layout::getDescription)
-        .containsExactly(site, expected.getName(), expected.getDescription());
+        .extracting(Layout::getSite, Layout::getLayoutTemplate, Layout::getDescription)
+        .containsExactly(site, expected.getLayoutTemplate(), expected.getDescription());
     assertThat(actual.getId()).isGreaterThan(0);
     assertThat(actual.getCreate())
         .isGreaterThanOrEqualTo(this.before)

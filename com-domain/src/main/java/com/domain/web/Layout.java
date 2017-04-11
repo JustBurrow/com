@@ -15,7 +15,7 @@ public interface Layout extends WebObject {
   /**
    * @return
    */
-  String getName();
+  String getLayoutTemplate();
 
   /**
    * @return

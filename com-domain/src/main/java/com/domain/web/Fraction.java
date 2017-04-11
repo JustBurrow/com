@@ -20,12 +20,12 @@ public interface Fraction extends WebObject {
   /**
    * @return
    */
-  String getTemplate();
+  String getFractionTemplate();
 
   /**
-   * @param template
+   * @param tremplateName
    */
-  void setTemplate(String template);
+  void setFractionTemplate(String tremplateName);
 
   /**
    * @param req
