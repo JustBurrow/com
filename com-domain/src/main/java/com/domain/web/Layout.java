@@ -30,8 +30,8 @@ public interface Layout extends WebObject {
 
   /**
    * @param name
-   * @param view
+   * @param fraction
    * @return
    */
-  Fraction setFraction(String name, Fraction view);
+  Fraction setFraction(String name, Fraction fraction);
 }

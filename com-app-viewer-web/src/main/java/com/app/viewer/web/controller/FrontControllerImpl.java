@@ -1,10 +1,10 @@
 package com.app.viewer.web.controller;
 
-import com.app.viewer.web.controller.req.GenericReq;
 import com.borderline.PageBorderline;
 import com.borderline.web.SiteBorderline;
 import com.borderline.web.dto.PageDto;
 import com.borderline.web.dto.SiteDto;
+import com.domain.web.GenericReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

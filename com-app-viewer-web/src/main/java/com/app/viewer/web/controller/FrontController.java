@@ -1,6 +1,6 @@
 package com.app.viewer.web.controller;
 
-import com.app.viewer.web.controller.req.GenericReq;
+import com.domain.web.GenericReq;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

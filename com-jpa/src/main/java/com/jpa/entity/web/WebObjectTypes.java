@@ -10,7 +10,7 @@ public enum WebObjectTypes implements WebObjectType {
   SITE,
   PAGE,
   LAYOUT,
-  VIEW;
+  FRACTION;
 
   @Override
   public int getId() {

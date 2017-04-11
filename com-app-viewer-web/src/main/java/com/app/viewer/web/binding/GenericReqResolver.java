@@ -1,6 +1,6 @@
 package com.app.viewer.web.binding;
 
-import com.app.viewer.web.controller.req.GenericReq;
+import com.domain.web.GenericReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;

@@ -76,7 +76,7 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
   }
 
   @Override
-  public Fraction setFraction(String name, Fraction view) {
+  public Fraction setFraction(String name, Fraction fraction) {
     return null;
   }
 

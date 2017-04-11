@@ -32,7 +32,7 @@ public abstract class AbstractWebObject implements WebObject {
    * <p><b>하위 클래스 정보에서 ID와 설명은 제외할 것.</b><br/><b>DO NOT INCLUDE ID AND DESCRIPTION.</b></p>
    *
    * @param clz 구현 클래스.
-   * @param str 구현 클래스의 인스턴스 정보. ID를 포함하지 말 것.
+   * @param str 구현 클래스의 인스턴스 정보. ID와 설명(description)을 포함하지 말 것.
    * @return 전체 인스턴스 정보.
    */
   protected String toString(Class<? extends WebObject> clz, CharSequence str) {
