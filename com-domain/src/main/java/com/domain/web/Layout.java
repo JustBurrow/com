@@ -29,9 +29,8 @@ public interface Layout extends WebObject {
   Fraction getFraction(String name);
 
   /**
-   * @param name
    * @param fraction
    * @return
    */
-  Fraction setFraction(String name, Fraction fraction);
+  Fraction setFraction(Fraction fraction);
 }

@@ -7,6 +7,8 @@ import com.domain.web.WebObjectType;
 import com.jpa.listener.TimestampEntityListener;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,21 +23,37 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  private int    id;
+  private int                   id;
   @ManyToOne(targetEntity = SiteEntity.class)
   @JoinColumn(name = "site",
       foreignKey = @ForeignKey(name = "FK_LAYOUT_PK_SITE"),
       referencedColumnName = "id",
       nullable = false,
       updatable = false)
-  private Site   site;
+  private Site                  site;
   @Column(name = "name", nullable = false)
-  private String name;
+  private String                name;
+  @ManyToMany(targetEntity = FractionEntity.class, cascade = CascadeType.ALL)
+  @JoinTable(name = "rel_layout_fraction",
+      joinColumns = @JoinColumn(name = "layout",
+          foreignKey = @ForeignKey(name = "REL_FRACTION_TO_LAYOUT"),
+          referencedColumnName = "id",
+          nullable = false,
+          updatable = false),
+      inverseJoinColumns = @JoinColumn(name = "fraction",
+          foreignKey = @ForeignKey(name = "REL_LAYOUT_TO_FRACTION"),
+          referencedColumnName = "id",
+          nullable = false,
+          updatable = false))
+  @MapKey(name = "name")
+  private Map<String, Fraction> fractions;
 
   private LayoutEntity() {
+    this.fractions = new HashMap<>();
   }
 
   public LayoutEntity(Site site, String name) {
+    this();
     this.site = site;
     this.name = name;
   }
@@ -67,17 +85,17 @@ public class LayoutEntity extends AbstractWebObject implements Layout {
 
   @Override
   public Map<String, Fraction> getFractions() {
-    return null;
+    return Collections.unmodifiableMap(this.fractions);
   }
 
   @Override
   public Fraction getFraction(String name) {
-    return null;
+    return this.fractions.get(name);
   }
 
   @Override
-  public Fraction setFraction(String name, Fraction fraction) {
-    return null;
+  public Fraction setFraction(Fraction fraction) {
+    return this.fractions.put(fraction.getName(), fraction);
   }
 
   @Override
