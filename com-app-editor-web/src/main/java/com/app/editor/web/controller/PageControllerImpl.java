@@ -61,7 +61,7 @@ import static java.lang.String.format;
                                           req.getDescription());
     PageDto page = this.pageBorderline.create(cmd);
 
-    return format("redirect:/pages/%d/%d", siteId, page.getId());
+    return format("redirect:/pages/%d/%d/edit", siteId, page.getId());
   }
 
   @Override
