@@ -20,6 +20,7 @@ import com.borderline.web.SiteBorderline;
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
 import com.borderline.web.cmd.UpdatePageCmd;
+import com.borderline.web.dto.DtoMap;
 import com.borderline.web.dto.PageDto;
 
 /**
@@ -91,16 +92,12 @@ class PageControllerImpl implements PageController {
       log.debug(format("siteId=%d, pageId=%d, model=%s", siteId, pageId, model));
     }
 
-    ReadPageCmd cmd = new ReadPageCmd(siteId, pageId);
-    PageDto page = null;
+    DtoMap map = this.pageBorderline.read(new ReadPageCmd(siteId, pageId));
+    model.addAllAttributes(map.getDtoMap());
 
-    model.addAttribute("site", this.siteBorderline.read(siteId));
-    model.addAttribute("page", page);
-
-    UpdatePageReq req = new UpdatePageReq(
-        page.getPath(), page.getTitle(), page.getLayout().getId(), page.getDescription());
-    model.addAttribute("layouts", this.layoutBorderline.list(siteId));
-    model.addAttribute("updateReq", req);
+    PageDto page = (PageDto) map.get("page");
+    model.addAttribute("updatePageReq",
+        new UpdatePageReq(page.getPath(), page.getTitle(), page.getLayout().getId(), page.getDescription()));
 
     if (log.isDebugEnabled()) {
       log.debug(format("after model : %s", model));
@@ -124,6 +121,6 @@ class PageControllerImpl implements PageController {
       return "redirect:/";
     }
 
-    return format("redirect:/pages/%d/%d/edit", siteId, pageId);
+    return format("redirect:/pages/%d/%d", siteId, pageId);
   }
 }

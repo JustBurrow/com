@@ -34,6 +34,10 @@ public class PageDto extends WebObjectDto {
     this.layout = layout;
   }
 
+  public FractionDto fraction(String name) {
+    return this.fractions.get(name);
+  }
+
   public void putFraction(String name, FractionDto fraction) {
     this.fractions.put(name, fraction);
   }

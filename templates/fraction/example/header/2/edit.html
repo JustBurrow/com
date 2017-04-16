@@ -18,14 +18,21 @@
 <body>
 <div class="fraction" th:fragment="display(fraction)">
   <section>
-    <h3>HEADER</h3>
-    <form action="edit.html" method="post">
-      <div class="form-group">
-        <label>content type</label>
-        <select class="form-control">
-          <option></option>
-        </select>
-      </div>
+    <h3>HEADER #2</h3>
+    <form action="edit.html" method="post"
+          th:action="@{/pages/__${site.id}__/__${page.id}__/__${fraction.name}__}" th:method="patch">
+      <fieldset>
+        <div class="form-group">
+          <label for="fraction-header-name" th:text="#{fraction.form.name.label}">name</label>
+          <input id="fraction-header-name" class="form-control" readonly="readonly" value="name"
+                 th:id="${#strings.concat('fraction-', fraction.name, '-name')}" th:value="${fraction.name}" />
+        </div>
+        <div class="form-group">
+          <label for="fraction-header-description" th:text="#{fraction.form.description.label}">description</label>
+          <input id="fraction-header-description" class="form-control" name="description" value="input fraction description"
+                 th:value="${fraction.description}"/>
+        </div>
+      </fieldset>
       <div class="form-group">
         <button class="btn btn-primary" th:text="#{fraction.form.save.label}">save</button>
         <button type="reset" class="btn btn-warning" th:text="#{fraction.form.reset.label}">reset</button>

@@ -1,8 +1,10 @@
 package com.borderline;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.toMap;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +14,11 @@ import org.springframework.stereotype.Service;
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
 import com.borderline.web.cmd.UpdatePageCmd;
+import com.borderline.web.converter.FractionDtoConverter;
 import com.borderline.web.converter.PageDtoConverter;
 import com.borderline.web.converter.SiteDtoConverter;
 import com.borderline.web.dto.DtoMap;
+import com.borderline.web.dto.FractionDto;
 import com.borderline.web.dto.PageDto;
 import com.domain.web.Layout;
 import com.domain.web.Page;
@@ -34,15 +38,17 @@ class PageBorderlineImpl implements PageBorderline {
   private static final Logger log = LoggerFactory.getLogger(PageBorderline.class);
 
   @Autowired
-  private PageService      pageService;
+  private PageService          pageService;
   @Autowired
-  private PageDtoConverter pageDtoConverter;
+  private PageDtoConverter     pageDtoConverter;
   @Autowired
-  private SiteService      siteService;
+  private SiteService          siteService;
   @Autowired
-  private LayoutService    layoutService;
+  private LayoutService        layoutService;
   @Autowired
-  private SiteDtoConverter siteDtoConverter;
+  private SiteDtoConverter     siteDtoConverter;
+  @Autowired
+  private FractionDtoConverter fractionDtoConverter;
 
   @Override
   public PageDto create(CreatePageCmd cmd) {
@@ -68,15 +74,22 @@ class PageBorderlineImpl implements PageBorderline {
       log.debug(format("cmd=%s", cmd));
     }
 
+    DtoMap map = new DtoMap();
+
     Page page = this.pageService.read(cmd.getPage());
     if (cmd.getSite() != page.getSite().getId()) {
       return null;
     }
 
-    DtoMap map = new DtoMap();
     map.put("site", this.siteDtoConverter.convert(page.getSite()));
 
     PageDto dto = this.pageDtoConverter.convert(page);
+    map.put("page", dto);
+    map.put("layouts", this.layoutService.list(page.getSite()));
+
+    Map<String, FractionDto> fractions = page.getLayout().getFractions().entrySet().stream()
+        .collect(toMap(Map.Entry::getKey, e -> this.fractionDtoConverter.convert(e.getValue())));
+    map.put("fractions", fractions);
 
     if (log.isDebugEnabled()) {
       log.debug(format("map=%s", map));

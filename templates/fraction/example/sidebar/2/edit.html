@@ -18,15 +18,34 @@
 <body>
 <div class="fraction" th:fragment="display(fraction)">
   <section>
-    <h3>SIDEBAR</h3>
+    <h3>SIDEBAR #2</h3>
     <ul>
-      <li>aaaaaa</li>
-      <li>aaaaaa</li>
-      <li>aaaaaa</li>
-      <li>aaaaaa</li>
-      <li>aaaaaa</li>
-      <li>aaaaaa</li>
+      <li>bbbbbbb</li>
+      <li>bbbbbbb</li>
+      <li>bbbbbbb</li>
+      <li>bbbbbbb</li>
+      <li>bbbbbbb</li>
+      <li>bbbbbbb</li>
     </ul>
+    <form action="edit.html" method="post"
+          th:action="@{/pages/__${site.id}__/__${page.id}__/__${fraction.name}__}" th:method="patch">
+      <fieldset>
+        <div class="form-group">
+          <label for="fraction-sidebar-name" th:text="#{fraction.form.name.label}">name</label>
+          <input id="fraction-sidebar-name" class="form-control" readonly="readonly" value="name"
+                 th:id="${#strings.concat('fraction-', fraction.name, '-name')}" th:value="${fraction.name}" />
+        </div>
+        <div class="form-group">
+          <label for="fraction-sidebar-description" th:text="#{fraction.form.description.label}">description</label>
+          <input id="fraction-sidebar-description" class="form-control" name="description" value="input fraction description"
+                 th:value="${fraction.description}"/>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-primary" th:text="#{fraction.form.save.label}">save</button>
+        <button type="reset" class="btn btn-warning" th:text="#{fraction.form.reset.label}">reset</button>
+      </div>
+    </form>
   </section>
 </div>
 </body>
