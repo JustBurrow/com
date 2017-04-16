@@ -3,13 +3,13 @@ package com.util.data;
 import java.util.List;
 
 /**
- * @param <I> type of list item.
+ * @param <I>
+ *          type of list item.
  * @author justburrow
  * @since 2017. 4. 9.
  */
 public class SimplePartialList<I> implements PartialList<I> {
   /**
-   *
    * @param sourceList
    * @param page
    * @param size
@@ -17,9 +17,9 @@ public class SimplePartialList<I> implements PartialList<I> {
    * @return
    */
   public static <I> SimplePartialList<I> asPartialList(List<I> sourceList, int page, int size) {
-    int totalPages = 1 +sourceList.size() / size;
-    int from = page * size ;
-    int to = Math.min(from +size, sourceList.size());
+    int totalPages = 1 + sourceList.size() / size;
+    int from = page * size;
+    int to = Math.min(from + size, sourceList.size());
     return new SimplePartialList<>(totalPages, sourceList.size(), page, size, sourceList.subList(from, to));
   }
 
@@ -33,11 +33,16 @@ public class SimplePartialList<I> implements PartialList<I> {
   }
 
   /**
-   * @param totalPages    전체 페이지 수. 0-base.
-   * @param totalElements 전체 아이템 수.
-   * @param page          현제 페이지. 0-base.
-   * @param capacity      페이지별 최대 아이템 수.
-   * @param content       페이지의 아이템 목록.
+   * @param totalPages¬
+   *          전체 페이지 수. 0-base.
+   * @param totalElements
+   *          전체 아이템 수.
+   * @param page
+   *          현제 페이지. 0-base.
+   * @param capacity
+   *          페이지별 최대 아이템 수.
+   * @param content
+   *          페이지의 아이템 목록.
    */
   public SimplePartialList(int totalPages, long totalElements, int page, int capacity, List<I> content) {
     this.totalPages = totalPages;

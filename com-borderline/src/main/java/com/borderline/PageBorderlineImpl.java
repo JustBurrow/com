@@ -1,9 +1,20 @@
 package com.borderline;
 
+import static java.lang.String.format;
+
+import java.net.URL;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
 import com.borderline.web.cmd.UpdatePageCmd;
 import com.borderline.web.converter.PageDtoConverter;
+import com.borderline.web.converter.SiteDtoConverter;
+import com.borderline.web.dto.DtoMap;
 import com.borderline.web.dto.PageDto;
 import com.domain.web.Layout;
 import com.domain.web.Page;
@@ -13,20 +24,13 @@ import com.service.web.PageService;
 import com.service.web.SiteService;
 import com.service.web.params.CreatePageParams;
 import com.service.web.params.UpdatePageParams;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.net.URL;
-
-import static java.lang.String.format;
 
 /**
  * @author justburrow
  * @since 2017. 4. 9.
  */
-@Service class PageBorderlineImpl implements PageBorderline {
+@Service
+class PageBorderlineImpl implements PageBorderline {
   private static final Logger log = LoggerFactory.getLogger(PageBorderline.class);
 
   @Autowired
@@ -37,6 +41,8 @@ import static java.lang.String.format;
   private SiteService      siteService;
   @Autowired
   private LayoutService    layoutService;
+  @Autowired
+  private SiteDtoConverter siteDtoConverter;
 
   @Override
   public PageDto create(CreatePageCmd cmd) {
@@ -44,12 +50,11 @@ import static java.lang.String.format;
       log.debug(format("cmd=%s", cmd));
     }
 
-    Site             site   = this.siteService.read(cmd.getSite());
-    Layout           layout = this.layoutService.read(cmd.getLayout());
+    Site site = this.siteService.read(cmd.getSite());
+    Layout layout = this.layoutService.read(cmd.getLayout());
     CreatePageParams params = new CreatePageParams(site, cmd.getPath(), cmd.getTitle(), layout, cmd.getDescription());
-    Page             page   = this.pageService.create(params);
-    PageDto          dto    = this.pageDtoConverter.convert(page);
-
+    Page page = this.pageService.create(params);
+    PageDto dto = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));
@@ -58,7 +63,7 @@ import static java.lang.String.format;
   }
 
   @Override
-  public PageDto read(ReadPageCmd cmd) {
+  public DtoMap read(ReadPageCmd cmd) {
     if (log.isDebugEnabled()) {
       log.debug(format("cmd=%s", cmd));
     }
@@ -68,12 +73,15 @@ import static java.lang.String.format;
       return null;
     }
 
+    DtoMap map = new DtoMap();
+    map.put("site", this.siteDtoConverter.convert(page.getSite()));
+
     PageDto dto = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
-      log.debug(format("dto=%s", dto));
+      log.debug(format("map=%s", map));
     }
-    return dto;
+    return map;
   }
 
   @Override
@@ -86,8 +94,8 @@ import static java.lang.String.format;
 
     String path = url.getPath();
     path = path.replaceAll("^/", "");
-    Page    page = this.pageService.read(site, path);
-    PageDto dto  = this.pageDtoConverter.convert(page);
+    Page page = this.pageService.read(site, path);
+    PageDto dto = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));
@@ -101,13 +109,13 @@ import static java.lang.String.format;
       log.debug(format("cmd=%s", cmd));
     }
 
-    Site   site   = this.siteService.read(cmd.getSite());
+    Site site = this.siteService.read(cmd.getSite());
     Layout layout = this.layoutService.read(cmd.getLayout());
 
     UpdatePageParams params = new UpdatePageParams(
         site, cmd.getPage(), cmd.getPath(), cmd.getTitle(), layout, cmd.getDescription());
-    Page    page = this.pageService.update(params);
-    PageDto dto  = this.pageDtoConverter.convert(page);
+    Page page = this.pageService.update(params);
+    PageDto dto = this.pageDtoConverter.convert(page);
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));

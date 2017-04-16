@@ -1,11 +1,11 @@
 package com.borderline.web.dto;
 
-import com.util.data.PartialList;
+import java.net.URL;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.net.URL;
 
 /**
  * @author justburrow
@@ -15,6 +15,16 @@ import java.net.URL;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class SiteDto extends WebObjectDto {
-  private URL                  url;
-  private PartialList<PageDto> pages;
+  private URL url;
+
+  public SiteDto() {
+  }
+
+  public SiteDto(int id, String description) {
+    super(id, description);
+  }
+
+  public SiteDto(int id, String description, LocalDateTime create, LocalDateTime update) {
+    super(id, description, create, update);
+  }
 }

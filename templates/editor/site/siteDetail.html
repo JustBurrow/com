@@ -58,14 +58,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="page : ${site.pages.content}">
+        <tr th:each="page : ${pages.content}">
           <td>
             <a class="btn btn-link" href="../page/pageEdit.html"
-               th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="${page.id}">id</a>
+               th:href="@{/pages/__${site.id}__/__${page.id}__}" th:text="${page.id}">id</a>
           </td>
           <td>
             <a href="../page/pageEdit.html"
-               th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="${page.path}">path</a>
+               th:href="@{/pages/__${site.id}__/__${page.id}__}" th:text="${page.path}">path</a>
           </td>
           <td th:text="${site.description}">description</td>
           <td th:text="${site.create}">create</td>
@@ -74,11 +74,11 @@
         </tr>
         </tbody>
       </table>
-      <div th:unless="0 == ${site.pages.totalPages}">
-        <ul class="pagination" th:start="${1 +site.pages.page}">
-          <li th:each="p : ${#numbers.sequence(__${1 +site.pages.page}__, __${site.pages.totalPages}__)}">
-            <span th:if="p == ${1 +site.pages.page}">current page</span>
-            <a href="siteDetail.html" th:unless="p == ${1 +site.pages.page}"
+      <div th:unless="0 == ${pages.totalPages}">
+        <ul class="pagination" th:start="${T(java.lang.Math).max(1, pages.page -1)}">
+          <li th:each="p : ${#numbers.sequence(__${T(java.lang.Math).max(1, pages.page -1)}__, __${T(java.lang.Math).min(pages.totalPages, pages.page+3)}__)}">
+            <span th:if="${p == 1 +pages.page}" th:text="${p}">current page</span>
+            <a href="siteDetail.html" th:unless="${p == 1 +pages.page}"
                th:href="@{/sites/__${site.id}__(page=__${p}__)}" th:text="${p}">#1</a>
           </li>
         </ul>

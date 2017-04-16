@@ -42,11 +42,20 @@ public interface PageController {
    * @return
    * @throws HttpException
    */
+  @GetMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}")
+  String detail(int siteId, int pageId, Model model) throws HttpException;
+
+  /**
+   * @param siteId
+   * @param pageId
+   * @param model
+   * @return
+   * @throws HttpException
+   */
   @GetMapping("/{siteId:[1-9]\\d*}/{pageId:[1-9]\\d*}/edit")
   String updateForm(int siteId, int pageId, Model model) throws HttpException;
 
   /**
-   *
    * @param siteId
    * @param pageId
    * @param req

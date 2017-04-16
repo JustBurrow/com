@@ -1,13 +1,15 @@
 package com.borderline;
 
-import com.borderline.web.cmd.CreatePageCmd;
-import com.borderline.web.cmd.ReadPageCmd;
-import com.borderline.web.cmd.UpdatePageCmd;
-import com.borderline.web.dto.PageDto;
+import java.net.URL;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URL;
+import com.borderline.web.cmd.CreatePageCmd;
+import com.borderline.web.cmd.ReadPageCmd;
+import com.borderline.web.cmd.UpdatePageCmd;
+import com.borderline.web.dto.DtoMap;
+import com.borderline.web.dto.PageDto;
 
 /**
  * @author justburrow
@@ -25,7 +27,7 @@ public interface PageBorderline {
    * @param cmd
    * @return
    */
-  PageDto read(ReadPageCmd cmd);
+  DtoMap read(ReadPageCmd cmd);
 
   /**
    * @param url

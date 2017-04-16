@@ -1,13 +1,16 @@
 package com.borderline.web;
 
-import com.borderline.web.cmd.CreateSiteCmd;
-import com.borderline.web.cmd.UpdateSiteCmd;
-import com.borderline.web.dto.SiteDto;
+import java.net.URL;
+import java.util.List;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URL;
-import java.util.List;
+import com.borderline.web.cmd.CreateSiteCmd;
+import com.borderline.web.cmd.ReadSiteCmd;
+import com.borderline.web.cmd.UpdateSiteCmd;
+import com.borderline.web.dto.DtoMap;
+import com.borderline.web.dto.SiteDto;
 
 /**
  * @author justburrow
@@ -44,7 +47,6 @@ public interface SiteBorderline {
   SiteDto read(int id, int page);
 
   /**
-   *
    * @param url
    * @return
    */
@@ -55,4 +57,10 @@ public interface SiteBorderline {
    * @return
    */
   SiteDto update(UpdateSiteCmd cmd);
+
+  /**
+   * @param cmd
+   * @return
+   */
+  DtoMap read(ReadSiteCmd cmd);
 }
