@@ -11,6 +11,7 @@ spring:
     show-sql: true
     generate-ddl: true
     database: mysql
+    open-in-view: false
   thymeleaf:
     cache: false
     prefix: file:./templates/
