@@ -2,6 +2,7 @@ package com.app.viewer.web.controller;
 
 import com.borderline.PageBorderline;
 import com.borderline.web.SiteBorderline;
+import com.borderline.web.dto.DtoMap;
 import com.borderline.web.dto.PageDto;
 import com.borderline.web.dto.SiteDto;
 import com.domain.web.GenericReq;
@@ -36,14 +37,15 @@ import static java.lang.String.format;
       log.debug(format("url=%s, req=%s, model=%s", url, req, model));
     }
 
-    SiteDto site = this.siteBorderline.read(url);
-    model.addAttribute("site", site);
-
-    PageDto page = this.pageBorderline.read(url);
-    if (null == page) {
-      throw new NullPointerException(format("url=%s", url));
-    }
-    model.addAttribute("page", page);
+    DtoMap map = pageBorderline.read(url, req);
+    map.getDtoMap().forEach((name, dto)->{
+      if(model.containsAttribute(name)) {
+        if(log.isWarnEnabled()){
+          log.warn(format("attribute duplicated. name=%s, attri=%s, dto=%s", name, model.asMap().get(name), dto));
+        }
+      }
+      model.addAttribute(name, dto);
+    });
 
     if (log.isDebugEnabled()) {
       log.debug(format("after model : %s", model));

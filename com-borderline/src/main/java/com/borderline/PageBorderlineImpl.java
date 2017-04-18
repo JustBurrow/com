@@ -6,6 +6,9 @@ import static java.util.stream.Collectors.toMap;
 import java.net.URL;
 import java.util.Map;
 
+import com.borderline.web.converter.LayoutDtoConverter;
+import com.borderline.web.dto.LayoutDto;
+import com.domain.web.GenericReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,8 @@ class PageBorderlineImpl implements PageBorderline {
   private SiteDtoConverter     siteDtoConverter;
   @Autowired
   private FractionDtoConverter fractionDtoConverter;
+  @Autowired
+  private LayoutDtoConverter layoutDtoConverter;
 
   @Override
   public PageDto create(CreatePageCmd cmd) {
@@ -98,22 +103,27 @@ class PageBorderlineImpl implements PageBorderline {
   }
 
   @Override
-  public PageDto read(URL url) {
-    if (log.isDebugEnabled()) {
-      log.debug(format("url=%s", url));
+  public DtoMap read(URL url, GenericReq req) {
+    if(log.isDebugEnabled()){
+      log.debug(format("url=%s, req=%s", url, req));
     }
 
-    Site site = this.siteService.read(url);
+    Site site = siteService.read(url);
+    Page page = pageService.read(site, url.getPath().replaceAll("^/", ""));
 
-    String path = url.getPath();
-    path = path.replaceAll("^/", "");
-    Page page = this.pageService.read(site, path);
-    PageDto dto = this.pageDtoConverter.convert(page);
+    DtoMap map = new DtoMap();
+    map.put("site", siteDtoConverter.convert(site));
+    map.put("page", pageDtoConverter.convert(page));
+    map.put(
+        "fractions",
+        page.getLayout().getFractions().entrySet().stream()
+            .collect(toMap(Map.Entry::getKey, e->fractionDtoConverter.convert(e.getValue())))
+    );
 
-    if (log.isDebugEnabled()) {
-      log.debug(format("dto=%s", dto));
+    if(log.isDebugEnabled()){
+      log.debug(format("map=%s", map));
     }
-    return dto;
+    return map;
   }
 
   @Override
