@@ -29,8 +29,8 @@
         </div>
         <div class="form-group">
           <label for="fraction-header-description" th:text="#{fraction.form.description.label}">description</label>
-          <input id="fraction-header-description" class="form-control" name="description" value="input fraction description"
-                 th:value="${fraction.description}"/>
+          <textarea id="fraction-header-description" class="form-control" name="description" value="input fraction description"
+                    th:text="${fraction.description}"></textarea>
         </div>
       </fieldset>
       <div class="form-group">

@@ -19,14 +19,6 @@
 <div class="fraction" th:fragment="display(fraction)">
   <section>
     <h3>SIDEBAR #2</h3>
-    <ul>
-      <li>bbbbbbb</li>
-      <li>bbbbbbb</li>
-      <li>bbbbbbb</li>
-      <li>bbbbbbb</li>
-      <li>bbbbbbb</li>
-      <li>bbbbbbb</li>
-    </ul>
     <form action="edit.html" method="post"
           th:action="@{/pages/__${site.id}__/__${page.id}__/__${fraction.name}__}" th:method="patch">
       <fieldset>
@@ -37,8 +29,8 @@
         </div>
         <div class="form-group">
           <label for="fraction-sidebar-description" th:text="#{fraction.form.description.label}">description</label>
-          <input id="fraction-sidebar-description" class="form-control" name="description" value="input fraction description"
-                 th:value="${fraction.description}"/>
+          <textarea id="fraction-sidebar-description" class="form-control" name="description" value="input fraction description"
+                    th:text="${fraction.description}"></textarea>
         </div>
       </fieldset>
       <div class="form-group">

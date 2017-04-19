@@ -2,6 +2,8 @@ package com.app.editor.web.controller;
 
 import static java.lang.String.format;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.app.editor.web.controller.req.CreatePageReq;
+import com.app.editor.web.controller.req.UpdateFractionReq;
 import com.app.editor.web.controller.req.UpdatePageReq;
 import com.app.editor.web.exception.HttpException;
 import com.borderline.PageBorderline;
@@ -19,6 +22,7 @@ import com.borderline.web.LayoutBorderline;
 import com.borderline.web.SiteBorderline;
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
+import com.borderline.web.cmd.UpdateFractionCmd;
 import com.borderline.web.cmd.UpdatePageCmd;
 import com.borderline.web.dto.DtoMap;
 import com.borderline.web.dto.PageDto;
@@ -122,5 +126,27 @@ class PageControllerImpl implements PageController {
     }
 
     return format("redirect:/pages/%d/%d", siteId, pageId);
+  }
+
+  @Override
+  public String updateFraction(
+      @PathVariable("siteId") final int siteId, @PathVariable("pageId") final int pageId,
+      @PathVariable("fractionName") final String fractionName,
+      @ModelAttribute @Valid final UpdateFractionReq req,
+      final BindingResult binding, final Model model)
+      throws HttpException {
+    if (log.isDebugEnabled()) {
+      log.debug(format("siteId=%d, pageId=%d, fractionName=%s, req=%s, binding=%s, model=%s",
+          siteId, pageId, fractionName, req, binding, model));
+    }
+
+    UpdateFractionCmd cmd = new UpdateFractionCmd(siteId, pageId, fractionName, req.getDescription());
+    DtoMap map = this.pageBorderline.update(cmd);
+
+    String redirect = format("redirect:/pages/%d/%d", siteId, pageId);
+    if (log.isDebugEnabled()) {
+      log.debug(format("redirect=%s, model=%s", redirect, model));
+    }
+    return redirect;
   }
 }

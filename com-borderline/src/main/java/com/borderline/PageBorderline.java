@@ -2,15 +2,16 @@ package com.borderline;
 
 import java.net.URL;
 
-import com.domain.web.GenericReq;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.borderline.web.cmd.CreatePageCmd;
 import com.borderline.web.cmd.ReadPageCmd;
+import com.borderline.web.cmd.UpdateFractionCmd;
 import com.borderline.web.cmd.UpdatePageCmd;
 import com.borderline.web.dto.DtoMap;
 import com.borderline.web.dto.PageDto;
+import com.domain.web.GenericReq;
 
 /**
  * @author justburrow
@@ -31,7 +32,6 @@ public interface PageBorderline {
   DtoMap read(ReadPageCmd cmd);
 
   /**
-   *
    * @param url
    * @param req
    * @return
@@ -43,4 +43,10 @@ public interface PageBorderline {
    * @return
    */
   PageDto update(UpdatePageCmd cmd);
+
+  /**
+   * @param cmd
+   * @return
+   */
+  DtoMap update(UpdateFractionCmd cmd);
 }

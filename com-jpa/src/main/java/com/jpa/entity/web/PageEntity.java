@@ -1,5 +1,19 @@
 package com.jpa.entity.web;
 
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import com.domain.base.Content;
 import com.domain.web.Layout;
 import com.domain.web.Page;
@@ -7,18 +21,14 @@ import com.domain.web.Site;
 import com.domain.web.WebObjectType;
 import com.jpa.listener.TimestampEntityListener;
 
-import javax.persistence.*;
-import java.util.Map;
-
-import static java.lang.String.format;
-
 /**
  * @author justburrow
  * @since 2017. 4. 9.
  */
 @Entity(name = "Page")
-@EntityListeners({TimestampEntityListener.class})
-@Table(name = "master_page", uniqueConstraints = {@UniqueConstraint(name = "UQ_PAGE", columnNames = {"site", "path"})})
+@EntityListeners({ TimestampEntityListener.class })
+@Table(name = "master_page",
+    uniqueConstraints = { @UniqueConstraint(name = "UQ_PAGE", columnNames = { "site", "path" }) })
 public class PageEntity extends AbstractWebObject implements Page {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,18 +61,18 @@ public class PageEntity extends AbstractWebObject implements Page {
 
   public PageEntity(Site site, String path) {
     this(site);
-    setPath(path);
+    this.setPath(path);
   }
 
   public PageEntity(Site site, String path, String title, Layout layout) {
     this(site, path);
-    setTitle(title);
-    setLayout(layout);
+    this.setTitle(title);
+    this.setLayout(layout);
   }
 
   public PageEntity(Site site, String path, String title, Layout layout, String description) {
     this(site, path, title, layout);
-    setDescription(description);
+    this.setDescription(description);
   }
 
   @Override
@@ -141,9 +151,8 @@ public class PageEntity extends AbstractWebObject implements Page {
 
   @Override
   public String toString() {
-    return toString(PageEntity.class, new StringBuilder()
-        .append("url=").append(format("%s/%s", this.site.getUrl(), this.path))
-        .append(", title=").append(this.title)
-    );
+    return this.toString(PageEntity.class, new StringBuilder()
+        .append("url=").append(this.getUrl())
+        .append(", title=").append(this.title));
   }
 }

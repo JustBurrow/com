@@ -1,23 +1,27 @@
 package com.service.web;
 
-import com.domain.web.Page;
-import com.domain.web.Site;
-import com.jpa.entity.web.PageEntity;
-import com.service.web.dao.PageDao;
-import com.service.web.params.CreatePageParams;
-import com.service.web.params.UpdatePageParams;
+import static java.lang.String.format;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static java.lang.String.format;
+import com.domain.web.Fraction;
+import com.domain.web.Page;
+import com.domain.web.Site;
+import com.jpa.entity.web.PageEntity;
+import com.service.web.dao.PageDao;
+import com.service.web.params.CreatePageParams;
+import com.service.web.params.UpdateFractionParams;
+import com.service.web.params.UpdatePageParams;
 
 /**
  * @author justburrow
  * @since 2017. 4. 9.
  */
-@Service class PageServiceImpl implements PageService {
+@Service
+class PageServiceImpl implements PageService {
   private static final Logger log = LoggerFactory.getLogger(PageService.class);
 
   @Autowired
@@ -86,6 +90,26 @@ import static java.lang.String.format;
     page.setLayout(params.getLayout());
     page.setDescription(params.getDescription());
 
+    return page;
+  }
+
+  @Override
+  public Page update(UpdateFractionParams params) {
+    if (log.isDebugEnabled()) {
+      log.debug(format("params=%s", params));
+    }
+
+    Page page = this.pageDao.read(params.getPage());
+    if (!page.getSite().equals(params.getSite())) {
+      throw new IllegalArgumentException(format("page=%s, params=%s", page, params));
+    }
+
+    Fraction fraction = page.getLayout().getFraction(params.getFraction());
+    fraction.setDescription(params.getDescription());
+
+    if (log.isDebugEnabled()) {
+      log.debug(format("page=%s, fraction=%s", page, fraction));
+    }
     return page;
   }
 }

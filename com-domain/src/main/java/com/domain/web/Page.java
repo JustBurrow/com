@@ -1,8 +1,10 @@
 package com.domain.web;
 
-import com.domain.base.Content;
-
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
+
+import com.domain.base.Content;
 
 /**
  * @author justburrow
@@ -20,7 +22,20 @@ public interface Page extends WebObject {
   String getPath();
 
   /**
-   * @param path URL pattern.
+   * @return
+   */
+  default URL getUrl() {
+    URL siteUrl = getSite().getUrl();
+    try {
+      return new URL(siteUrl.getProtocol(), siteUrl.getHost(), getPath());
+    } catch (MalformedURLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * @param path
+   *          URL pattern.
    */
   void setPath(String path);
 
