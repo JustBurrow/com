@@ -25,7 +25,6 @@ class FractionDtoConverterImpl extends AbstractDtoConverter implements FractionD
 
     FractionDto dto = this.initialize(fraction, new FractionDto());
     dto.setName(fraction.getName());
-    dto.setFractionTemplate(fraction.getFractionTemplate());
 
     if (log.isDebugEnabled()) {
       log.debug(format("dto=%s", dto));

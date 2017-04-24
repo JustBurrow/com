@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 24." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Summary</title>
+</head>
+<body>
+<div class="fraction summary" th:fragment="display(fraction)">
+  <h3 th:text="${fraction.name}">fraction name</h3>
+  <section>
+    <h4 th:text="#{fraction.summary.basic.h4}">basic info</h4>
+    <dl>
+      <dt th:text="#{fraction.summary.basic.description.label}">description</dt>
+      <dd th:text="${fraction.description}">description</dd>
+      <dt th:text="#{fraction.summary.basic.created.label}">created at</dt>
+      <dd th:text="${fraction.create}">created at</dd>
+      <dt th:text="#{fraction.summary.basic.updated.label}">updated at</dt>
+      <dd th:text="${fraction.update}">updated at</dd>
+    </dl>
+  </section>
+</div>
+</body>
+</html>

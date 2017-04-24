@@ -60,8 +60,8 @@ public class FractionRepositoryTest {
     // Then
     assertThat(actual)
         .isNotNull()
-        .extracting(Fraction::getName, Fraction::getFractionTemplate, Fraction::getDescription)
-        .containsExactly(expected.getName(), expected.getFractionTemplate(), expected.getDescription());
+        .extracting(Fraction::getName, Fraction::getDescription)
+        .containsExactly(expected.getName(), expected.getDescription());
     assertThat(actual.getId()).isGreaterThan(0);
     assertThat(actual.getCreate())
         .isGreaterThanOrEqualTo(this.before)

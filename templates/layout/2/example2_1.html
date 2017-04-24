@@ -18,21 +18,21 @@
 <body>
 <div th:fragment="display(page, mode)" class="container">
   <div class="fraction" data-fraction="header"
-       th:include="fraction/__${page.fraction('header').fractionTemplate}__/__${mode}__ :: display(${fractions.header})">
+       th:include="fraction/__${mode}__ :: display(${fractions.header})">
     header fraction
   </div>
   <div class="container row">
     <div class="fraction col-md-10" data-fraction="content"
-         th:include="fraction/__${page.fraction('content').fractionTemplate}__/__${mode}__ :: display(${fractions.content})">
+         th:include="fraction/__${mode}__ :: display(${fractions.content})">
       content fraction
     </div>
     <div class="fraction col-md-2" data-fraction="sidebar"
-         th:include="fraction/__${page.fraction('sidebar').fractionTemplate}__/__${mode}__ :: display(${fractions.sidebar})">
+         th:include="fraction/__${mode}__ :: display(${fractions.sidebar})">
       sidebar fraction
     </div>
   </div>
   <div class="fraction" data-fraction="footer"
-       th:include="fraction/__${page.fraction('footer').fractionTemplate}__/__${mode}__ :: display(${fractions.footer})">
+       th:include="fraction/__${mode}__ :: display(${fractions.footer})">
     footer fraction
   </div>
 </div>

@@ -13,13 +13,11 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class FractionDto extends WebObjectDto {
   private String name;
-  private String fractionTemplate;
 
   public FractionDto() {
   }
 
-  public FractionDto(String name, String fractionTemplate) {
+  public FractionDto(String name) {
     this.name = name;
-    this.fractionTemplate = fractionTemplate;
   }
 }

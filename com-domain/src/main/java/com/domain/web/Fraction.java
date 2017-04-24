@@ -18,16 +18,6 @@ public interface Fraction extends WebObject {
   void setName(String name);
 
   /**
-   * @return
-   */
-  String getFractionTemplate();
-
-  /**
-   * @param tremplateName
-   */
-  void setFractionTemplate(String tremplateName);
-
-  /**
    * @param req
    * @return
    */

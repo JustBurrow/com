@@ -143,7 +143,7 @@ class PageControllerImpl implements PageController {
     UpdateFractionCmd cmd = new UpdateFractionCmd(siteId, pageId, fractionName, req.getDescription());
     DtoMap map = this.pageBorderline.update(cmd);
 
-    String redirect = format("redirect:/pages/%d/%d", siteId, pageId);
+    String redirect = format("redirect:/pages/%d/%d/edit", siteId, pageId);
     if (log.isDebugEnabled()) {
       log.debug(format("redirect=%s, model=%s", redirect, model));
     }
