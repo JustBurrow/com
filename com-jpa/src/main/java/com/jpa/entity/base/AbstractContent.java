@@ -2,7 +2,8 @@ package com.jpa.entity.base;
 
 import com.domain.base.Content;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -12,10 +13,6 @@ import java.util.Objects;
  */
 @MappedSuperclass
 public abstract class AbstractContent implements Content {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  private long    id;
   @Column(name = "description")
   private String  description;
   @Column(name = "create_utc", nullable = false, updatable = false)
@@ -24,18 +21,18 @@ public abstract class AbstractContent implements Content {
   private Instant update;
 
   protected StringBuilder toString(Class<? extends AbstractContent> clz, CharSequence sub) {
-    return new StringBuilder(clz.getSimpleName())
-        .append("{id=").append(this.id)
-        .append(", description=").append(this.description)
-        .append(", ").append(sub)
-        .append(", create=").append(this.create)
-        .append(", update=").append(this.update)
-        .append('}');
-  }
+    StringBuilder sb = new StringBuilder(clz.getSimpleName())
+        .append("{id=").append(this.getId())
+        .append(", description=").append(this.description);
 
-  @Override
-  public long getId() {
-    return this.id;
+    if (null != sub && 0 < sub.length()) {
+      sb.append(", ").append(sub);
+    }
+
+    sb.append(", create=").append(this.create)
+      .append(", update=").append(this.update)
+      .append('}');
+    return sb;
   }
 
   @Override
@@ -60,13 +57,13 @@ public abstract class AbstractContent implements Content {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+    return Objects.hash(this.getId());
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (0L < this.id && null != obj && obj instanceof AbstractContent) {
-      return this.id == ((AbstractContent) obj).id;
+    if (0L < this.getId() && null != obj && obj instanceof AbstractContent) {
+      return this.getId() == ((AbstractContent) obj).getId();
     } else {
       return false;
     }

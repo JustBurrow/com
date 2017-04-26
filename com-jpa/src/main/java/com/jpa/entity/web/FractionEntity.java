@@ -1,6 +1,5 @@
 package com.jpa.entity.web;
 
-import com.domain.base.ContentContext;
 import com.domain.web.Fraction;
 import com.domain.web.GenericReq;
 import com.domain.web.WebObjectType;
@@ -48,11 +47,6 @@ public class FractionEntity extends AbstractWebObject implements Fraction {
   @Override
   public void setName(String name) {
     this.name = name;
-  }
-
-  @Override
-  public ContentContext buildContext(GenericReq req) {
-    return null;
   }
 
   @Override
