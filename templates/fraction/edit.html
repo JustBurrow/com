@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 24." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Edit</title>
+</head>
+<body>
+  <div class="fraction edit panel panel-default" th:fragment="display(fraction)">
+    <h3 class="panel-heading"><span th:text="#{fraction.edit.h3}">name</span> : <span th:text="${fraction.name}">fraction name</span></h3>
+    <form class="panel-body" action="edit.html" method="post" th:action="@{/pages/__${site.id}__/__${page.id}__/__${fraction.name}__}" th:method="patch">
+      <fieldset>
+        <div class="form-group">
+          <label for="description" th:for="${fraction.name + '-description'}">description</label>
+          <textarea id="description" name="description" class="form-control"
+                    th:id="${fraction.name + '-description'}" th:text="${fraction.description}"></textarea>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-primary" th:text="#{fraction.edit.save.label}">save</button>
+        <button type="reset" class="btn btn-warning" th:text="#{fraction.edit.reset.label}">reset</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

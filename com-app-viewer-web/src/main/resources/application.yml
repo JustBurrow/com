@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/com
+    username: root
+    password:
+    max-active: 1
+    min-idle: 1
+    max-idle: 1
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    open-in-view: false
+  thymeleaf:
+    cache: false
+    prefix: file:./templates/
+server:
+  port: 8080
+logging:
+  pattern:
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(-%5p) %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger{39}#%M [L.%L]){cyan} %clr(:){faint} %m%n%wEx'
+  level:
+#    root: warn
+    com: debug

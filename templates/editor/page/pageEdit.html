@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 10." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <title th:text="#{page.edit.title}">page detail</title>
+</head>
+<body>
+<div class="container row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul th:remove="all">
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <h1 th:text="#{page.edit.h1}">page detail</h1>
+    <section class="panel panel-default">
+      <h2 class="panel-heading" th:text="#{page.edit.basic.h2}">page basic</h2>
+      <!--/*@thymesVar id="updatePageReq" type="com.app.editor.web.controller.req.UpdatePageReq"*/-->
+      <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
+      <!--/*@thymesVar id="page" type="com.borderline.web.dto.PageDto"*/-->
+      <form id="basic" class="panel-body" action="pageEdit.html" method="post"
+            th:action="@{/pages/__${site.id}__/__${page.id}__}" th:method="patch" th:object="${updatePageReq}">
+        <div class="form-group">
+          <label for="basic-path" th:text="#{page.edit.basic.form.path.label}">path</label>
+          <span class="form-control">
+            <label for="basic-path" th:text="${site.url}">site url</label>/<input
+              id="basic-path" aria-describedby="basic-path-help" style="border: none;"
+              th:field="*{path}" th:placeholder="#{page.edit.basic.form.path.placeholder}"/>
+          </span>
+          <span id="basic-path-help" class="help-block"
+                th:if="${#strings.isEmpty(updatePageReq.path)}" th:text="#{page.edit.basic.form.path.help}">empty path</span>
+        </div>
+        <div class="form-group">
+          <label for="basic-title" th:text="#{page.edit.basic.form.title.label}">title</label>
+          <input id="basic-title" class="form-control" placeholder="Input page title."
+                 th:field="*{title}" th:placeholder="#{page.edit.basic.form.title.placeholder}"/>
+        </div>
+        <div class="form-group">
+          <label for="basic-layout" th:text="#{page.edit.basic.form.layout.label }">layout</label>
+          <select id="basic-layout" class="form-control" required="required" size="1" th:field="*{layout}">
+            <option label="select a layout template." disabled="disabled" value="0" th:label="#{page.edit.basic.form.layout.option.emptylabel}"/>
+            <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
+            <!--/*@thymesVar id="l" type="com.borderline.web.dto.LayoutDto"*/-->
+            <option th:each="l : ${layouts}" th:value="${l.id}" th:text="${l.layoutTemplate}">
+              layout template name
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="basic-description" th:text="#{page.edit.basic.form.description.label}">description</label>
+          <textarea id="basic-description" class="form-control"
+                    th:field="*{description}"
+                    th:placeholder="#{page.edit.basic.form.description.placeholder}"></textarea>
+        </div>
+        <div class="form-group row">
+          <div class=" col-md-4">
+            <button class="form-control btn btn-primary"
+                    th:text="#{page.edit.basic.form.submit.label}">submit
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button type="reset" class="form-control btn btn-warning"
+                    th:text="#{page.edit.basic.form.reset.label}">reset
+            </button>
+          </div>
+          <div class="col-md-4">
+            <a href="../site/siteDetail.html" class="form-control btn btn-default"
+               th:href="@{/pages/__${site.id}__/__${page.id}__}" th:text="#{page.edit.basic.form.cancel.label}">page</a>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section id="design">
+      <h2 th:text="#{page.edit.content.h2}">page design</h2>
+      <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'edit')">
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

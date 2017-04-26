@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-layoutTemplate: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/com
+    username: root
+    password:
+    max-active: 1
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+logging:
+  level:
+    root: warn
+    com: debug

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 11." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <title>default layout #1</title>
+</head>
+<body>
+<div th:fragment="display(page, mode)" class="container">
+  <div class="fraction panel panel-default" data-fraction="header"
+       th:include="fraction/__${mode}__ :: display(${fractions.header})">
+    header fraction
+  </div>
+  <div class="container row">
+    <div class="fraction col-md-10 panel panel-default" data-fraction="content"
+         th:include="fraction/__${mode}__ :: display(${fractions.content})">
+      content fraction
+    </div>
+    <div class="fraction col-md-2 panel panel-default" data-fraction="sidebar"
+         th:include="fraction/__${mode}__ :: display(${fractions.sidebar})">
+      sidebar fraction
+    </div>
+  </div>
+  <div class="fraction panel panel-default" data-fraction="footer"
+       th:include="fraction/__${mode}__ :: display(${fractions.footer})">
+    footer fraction
+  </div>
+</div>
+</body>
+</html>

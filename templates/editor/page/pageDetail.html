@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta name="author" content="justburrow" th:remove="all"/>
+  <meta name="since" content="2017. 4. 10." th:remove="all"/>
+  <meta name="project" content="com" th:remove="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <title th:text="#{page.detail.title}">page detail</title>
+</head>
+<body>
+<div class="container row">
+  <div class="col-md-2">
+    <nav th:replace="editor/component/navigation/main :: sidebar">
+      <ul th:remove="all">
+        <li><a href="#">side navigation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-10">
+    <!--/*@thymesVar id="page" type="com.borderline.web.dto.PageDto"*/-->
+    <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
+    <div class="panel panel-default">
+      <h1 class="panel-heading" th:text="#{page.detail.h1}">page detail</h1>
+      <dl class="panel-body dl-horizontal">
+        <dt th:text="#{page.detail.page.id.label}">id</dt>
+        <dd th:text="${page.id}">id</dd>
+        <dt th:text="#{page.detail.page.site.label}">site</dt>
+        <dd><a href="../site/siteDetail.html" th:href="@{/sites/__${site.id}__}" th:text="${page.site}">site url</a></dd>
+        <dt th:text="#{page.detail.page.path.label}">path</dt>
+        <dd th:text="${page.path}">path</dd>
+        <dt th:text="#{page.detail.page.title.label}">title</dt>
+        <dd th:text="${page.title}">title</dd>
+        <dt th:text="#{page.detail.page.layout.label}">layout</dt>
+        <dd th:text="${page.layout.layoutTemplate}">layout</dd>
+        <dt th:text="#{page.detail.page.description.label}">description</dt>
+        <dd th:text="${page.description}">description</dd>
+        <dt th:text="#{page.detail.page.create.label}">created at</dt>
+        <dd th:text="${page.create}">create</dd>
+        <dt th:text="#{page.detail.page.update.label}">updated at</dt>
+        <dd th:text="${page.update}">update</dd>
+      </dl>
+    </div>
+    <div>
+      <a class="btn btn-default" href="pageEdit.html" th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="#{page.detail.edit.label}">update</a>
+    </div>
+    <section id="design">
+      <h2 th:text="#{page.detail.design.h2}">page design</h2>
+      <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'summary')">
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>
