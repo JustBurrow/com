@@ -47,7 +47,9 @@
       </div>
       <div class="form-group">
         <label for="layout" th:text="#{page.create.form.layout.label}">layout</label>
-        <select id="layout" class="form-control" required="required" th:field="*{layout}">
+        <select id="layout" class="form-control" required="required" size="1" th:field="*{layout}">
+          <option value="0" disabled="disabled" label="select a layout template."
+                  th:label="#{page.create.form.layout.placeholder}"/>
           <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
           <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
           <option th:each="layout : ${layouts}" th:value="${layout.id}" th:text="${layout.layoutTemplate}">
@@ -70,7 +72,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <a href="../site/siteDetail.html" class="btn btn-link form-control"
+          <a href="../site/siteDetail.html" class="btn btn-default form-control"
              th:href="@{/sites/__${site.id}__}" th:text="#{page.create.form.cancel.label}">cancel(site)</a>
         </div>
       </div>

@@ -16,7 +16,7 @@ spring:
     cache: false
     prefix: file:./templates/
   messages:
-    cache-seconds: -1
+    cache-seconds: 0
     encoding: UTF-8
     basename: i18n/messages
 server:

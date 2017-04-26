@@ -27,25 +27,27 @@
   <div class="col-md-10">
     <!--/*@thymesVar id="page" type="com.borderline.web.dto.PageDto"*/-->
     <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
-    <h1 th:text="#{page.detail.h1}"></h1>
-    <dl class="dl-horizontal">
-      <dt th:text="#{page.detail.page.id.label}">id</dt>
-      <dd th:text="${page.id}">id</dd>
-      <dt th:text="#{page.detail.page.site.label}">site</dt>
-      <dd><a href="../site/siteDetail.html" th:href="@{/sites/__${site.id}__}" th:text="${page.site}">site url</a></dd>
-      <dt th:text="#{page.detail.page.path.label}">path</dt>
-      <dd th:text="${page.path}">path</dd>
-      <dt th:text="#{page.detail.page.title.label}">title</dt>
-      <dd th:text="${page.title}">title</dd>
-      <dt th:text="#{page.detail.page.layout.label}">layout</dt>
-      <dd th:text="${page.layout.layoutTemplate}">layout</dd>
-      <dt th:text="#{page.detail.page.description.label}">description</dt>
-      <dd th:text="${page.description}">description</dd>
-      <dt th:text="#{page.detail.page.create.label}">created at</dt>
-      <dd th:text="${page.create}">create</dd>
-      <dt th:text="#{page.detail.page.update.label}">updated at</dt>
-      <dd th:text="${page.update}">update</dd>
-    </dl>
+    <div class="panel panel-default">
+      <h1 class="panel-heading" th:text="#{page.detail.h1}">page detail</h1>
+      <dl class="panel-body dl-horizontal">
+        <dt th:text="#{page.detail.page.id.label}">id</dt>
+        <dd th:text="${page.id}">id</dd>
+        <dt th:text="#{page.detail.page.site.label}">site</dt>
+        <dd><a href="../site/siteDetail.html" th:href="@{/sites/__${site.id}__}" th:text="${page.site}">site url</a></dd>
+        <dt th:text="#{page.detail.page.path.label}">path</dt>
+        <dd th:text="${page.path}">path</dd>
+        <dt th:text="#{page.detail.page.title.label}">title</dt>
+        <dd th:text="${page.title}">title</dd>
+        <dt th:text="#{page.detail.page.layout.label}">layout</dt>
+        <dd th:text="${page.layout.layoutTemplate}">layout</dd>
+        <dt th:text="#{page.detail.page.description.label}">description</dt>
+        <dd th:text="${page.description}">description</dd>
+        <dt th:text="#{page.detail.page.create.label}">created at</dt>
+        <dd th:text="${page.create}">create</dd>
+        <dt th:text="#{page.detail.page.update.label}">updated at</dt>
+        <dd th:text="${page.update}">update</dd>
+      </dl>
+    </div>
     <div>
       <a class="btn btn-default" href="pageEdit.html" th:href="@{/pages/__${site.id}__/__${page.id}__/edit}" th:text="#{page.detail.edit.label}">update</a>
     </div>

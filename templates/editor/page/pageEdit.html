@@ -26,12 +26,12 @@
   </div>
   <div class="col-md-10">
     <h1 th:text="#{page.edit.h1}">page detail</h1>
-    <section>
-      <h2 th:text="#{page.edit.basic.h2}">page basic</h2>
+    <section class="panel panel-default">
+      <h2 class="panel-heading" th:text="#{page.edit.basic.h2}">page basic</h2>
       <!--/*@thymesVar id="updatePageReq" type="com.app.editor.web.controller.req.UpdatePageReq"*/-->
       <!--/*@thymesVar id="site" type="com.borderline.web.dto.SiteDto"*/-->
       <!--/*@thymesVar id="page" type="com.borderline.web.dto.PageDto"*/-->
-      <form id="basic" action="pageEdit.html" method="post"
+      <form id="basic" class="panel-body" action="pageEdit.html" method="post"
             th:action="@{/pages/__${site.id}__/__${page.id}__}" th:method="patch" th:object="${updatePageReq}">
         <div class="form-group">
           <label for="basic-path" th:text="#{page.edit.basic.form.path.label}">path</label>
@@ -50,7 +50,8 @@
         </div>
         <div class="form-group">
           <label for="basic-layout" th:text="#{page.edit.basic.form.layout.label }">layout</label>
-          <select id="basic-layout" class="form-control" required="required" th:field="*{layout}">
+          <select id="basic-layout" class="form-control" required="required" size="1" th:field="*{layout}">
+            <option label="select a layout template." disabled="disabled" value="0" th:label="#{page.edit.basic.form.layout.option.emptylabel}"/>
             <!--/*@thymesVar id="layouts" type="java.util.List"*/-->
             <!--/*@thymesVar id="l" type="com.borderline.web.dto.LayoutDto"*/-->
             <option th:each="l : ${layouts}" th:value="${l.id}" th:text="${l.layoutTemplate}">
