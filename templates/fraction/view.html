@@ -8,6 +8,8 @@
   <title>View</title>
 </head>
 <body>
-
+<div class="fraction fraction-view" th:fragment="display(fraction)">
+  <p th:text="${fraction.description}">fraction description.</p>
+</div>
 </body>
 </html>

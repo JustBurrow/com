@@ -53,7 +53,8 @@
     </div>
     <section id="design">
       <h2 th:text="#{page.detail.design.h2}">page design</h2>
-      <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'summary')">
+      <div class="container">
+        <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'summary')"></div>
       </div>
     </section>
   </div>

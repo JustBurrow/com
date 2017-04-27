@@ -8,7 +8,7 @@
   <title>Edit</title>
 </head>
 <body>
-  <div class="fraction edit panel panel-default" th:fragment="display(fraction)">
+  <div class="panel panel-default fraction fraction-edit" th:fragment="display(fraction)">
     <h3 class="panel-heading"><span th:text="#{fraction.edit.h3}">name</span> : <span th:text="${fraction.name}">fraction name</span></h3>
     <form class="panel-body" action="edit.html" method="post" th:action="@{/pages/__${site.id}__/__${page.id}__/__${fraction.name}__}" th:method="patch">
       <fieldset>
