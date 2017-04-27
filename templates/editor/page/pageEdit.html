@@ -17,14 +17,14 @@
 </head>
 <body>
 <div class="container row">
-  <div class="col-md-2">
+  <div class="col-lg-1 col-md-2">
     <nav th:replace="editor/component/navigation/main :: sidebar">
       <ul th:remove="all">
         <li><a href="#">side navigation</a></li>
       </ul>
     </nav>
   </div>
-  <div class="col-md-10">
+  <div class="col-lg-11 col-md-10">
     <h1 th:text="#{page.edit.h1}">page detail</h1>
     <section class="panel panel-default">
       <h2 class="panel-heading" th:text="#{page.edit.basic.h2}">page basic</h2>
@@ -85,7 +85,8 @@
     </section>
     <section id="design">
       <h2 th:text="#{page.edit.content.h2}">page design</h2>
-      <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'edit')">
+      <div class="container">
+        <div th:replace="layout/__${site.id}__/__${page.layout.layoutTemplate}__ :: display(${page}, 'edit')"></div>
       </div>
     </section>
   </div>

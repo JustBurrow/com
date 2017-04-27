@@ -19,11 +19,11 @@
 <div th:fragment="display(page, mode)">
   <div class="container-fluid">
     <div class="row">
-      <div class="fraction panel panel-default"
-           th:replace="fraction/__${mode}__ :: display(${fractions.header})">
+      <div data-fraction="header">
+        <div th:replace="fraction/__${mode}__ :: display(${fractions.header})"></div>
       </div>
-      <div class="fraction panel panel-default"
-           th:include="fraction/__${mode}__ :: display(${fractions.content})">
+      <div data-fraction="content">
+        <div th:replace="fraction/__${mode}__ :: display(${fractions.content})"></div>
       </div>
     </div>
   </div>
