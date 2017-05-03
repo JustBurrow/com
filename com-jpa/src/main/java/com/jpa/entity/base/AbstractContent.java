@@ -13,13 +13,21 @@ import java.util.Objects;
  */
 @MappedSuperclass
 public abstract class AbstractContent implements Content {
-  @Column(name = "description")
+  @Column(name = "description", length = 512)
   private String  description;
   @Column(name = "create_utc", nullable = false, updatable = false)
   private Instant create;
   @Column(name = "update_utc", nullable = false)
   private Instant update;
 
+  /**
+   * 자식 클래스의 {@link #toString()}을 사용하기 쉽게 만드는 유틸리티 메서드.
+   * 공통 필드에 대한 포맷을 제공한다.
+   *
+   * @param clz {@link #toString()}을 사용하는 인스턴스의 클래스.
+   * @param sub 자식 클래스의 데이터. ',' 구분. <b>id를 포함해 {@link AbstractContent}에서 처리하는 필드는 포함하지 말 것.</b>
+   * @return
+   */
   protected StringBuilder toString(Class<? extends AbstractContent> clz, CharSequence sub) {
     StringBuilder sb = new StringBuilder(clz.getSimpleName())
         .append("{id=").append(this.getId())
